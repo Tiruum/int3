@@ -1,0 +1,22 @@
+/* src/components/CustomCursor.css */
+.cursor {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    z-index: 9999;
+    transition: width 0.2s ease-out, height 0.2s ease-out, opacity 0.2s ease-out, background-color 0.2s;
+    transform: translate(-50%, -50%);
+}
+  
+.cursor.outer {
+    border: 2px solid white;
+    /* background-color: rgba(255, 255, 255, 0.5); */
+}
+  
+.cursor.inner {
+    background-color: white;
+}
+
+* {
+    cursor: none;
+}
