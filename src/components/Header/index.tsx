@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 const Header: React.FC = () => {
     // Состояние для открытия/закрытия меню на мобильных устройствах
-    const [isMenuOpen, setIsMenuOpen] = useState<Boolean>(false);
+    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const [section, setSection] = useState<string>('#intro')
 
     type HeaderItem = {
@@ -23,14 +23,20 @@ const Header: React.FC = () => {
             value: 'Интро',
             url: '#intro'
         }, {
-            value: 'Преимущества',
-            url: '#benefits'
+            value: 'Описание',
+            url: '#description'
         }, {
             value: 'Функции',
             url: '#functions'
         }, {
+            value: 'Преимущества',
+            url: '#benefits'
+        }, {
+            value: 'Сценарии',
+            url: '#scenarios'
+        }, {
             value: 'Визуализация',
-            url: '#vizualization'
+            url: '#visualization'
         }
     ]
 
@@ -44,7 +50,19 @@ const Header: React.FC = () => {
               onEnter: () => setSection('#intro'), // срабатывает, когда элемент входит в область
               onLeave: () => {}, // срабатывает, когда элемент покидает область
               onEnterBack: () => setSection('#intro'), // срабатывает, когда возвращается в область сверху
-              onLeaveBack: () => setSection('#intro') // срабатывает, когда покидает область снизу
+              onLeaveBack: () => {} // срабатывает, когда покидает область снизу
+            }
+        });
+
+        gsap.to("#description", {
+            scrollTrigger: {
+                trigger: "#description", // элемент триггер
+                start: "top center", // когда верх элемента достигает центра
+                end: "bottom center", // когда низ элемента покидает центр
+                onEnter: () => setSection('#description'), // срабатывает, когда элемент входит в область
+                onLeave: () => {}, // срабатывает, когда элемент покидает область
+                onEnterBack: () => setSection('#description'), // срабатывает, когда возвращается в область сверху
+                onLeaveBack: () => {} // срабатывает, когда покидает область снизу
             }
         });
 
@@ -56,7 +74,7 @@ const Header: React.FC = () => {
               onEnter: () => setSection('#benefits'), // срабатывает, когда элемент входит в область
               onLeave: () => {}, // срабатывает, когда элемент покидает область
               onEnterBack: () => setSection('#benefits'), // срабатывает, когда возвращается в область сверху
-              onLeaveBack: () => setSection('#benefits') // срабатывает, когда покидает область снизу
+              onLeaveBack: () => {} // срабатывает, когда покидает область снизу
             }
         });
 
@@ -68,19 +86,31 @@ const Header: React.FC = () => {
                 onEnter: () => setSection('#functions'), // срабатывает, когда элемент входит в область
                 onLeave: () => {}, // срабатывает, когда элемент покидает область
                 onEnterBack: () => setSection('#functions'), // срабатывает, когда возвращается в область сверху
-                onLeaveBack: () => setSection('#functions') // срабатывает, когда покидает область снизу
+                onLeaveBack: () => {} // срабатывает, когда покидает область снизу
             }
         });
 
-        gsap.to("#vizualization", {
+        gsap.to("#scenarios", {
             scrollTrigger: {
-                trigger: "#vizualization", // элемент триггер
+                trigger: "#scenarios", // элемент триггер
                 start: "top center", // когда верх элемента достигает центра
                 end: "bottom center", // когда низ элемента покидает центр
-                onEnter: () => setSection('#vizualization'), // срабатывает, когда элемент входит в область
+                onEnter: () => setSection('#scenarios'), // срабатывает, когда элемент входит в область
                 onLeave: () => {}, // срабатывает, когда элемент покидает область
-                onEnterBack: () => setSection('#vizualization'), // срабатывает, когда возвращается в область сверху
-                onLeaveBack: () => setSection('#vizualization') // срабатывает, когда покидает область снизу
+                onEnterBack: () => setSection('#scenarios'), // срабатывает, когда возвращается в область сверху
+                onLeaveBack: () => {} // срабатывает, когда покидает область снизу
+            }
+        });
+
+        gsap.to("#visualization", {
+            scrollTrigger: {
+                trigger: "#visualization", // элемент триггер
+                start: "top center", // когда верх элемента достигает центра
+                end: "bottom center", // когда низ элемента покидает центр
+                onEnter: () => setSection('#visualization'), // срабатывает, когда элемент входит в область
+                onLeave: () => {}, // срабатывает, когда элемент покидает область
+                onEnterBack: () => setSection('#visualization'), // срабатывает, когда возвращается в область сверху
+                onLeaveBack: () => {} // срабатывает, когда покидает область снизу
             }
         });
     
@@ -91,11 +121,11 @@ const Header: React.FC = () => {
     }, []);
 
     return (
-        <header className='fixed top-0 left-0 right-0'>
+        <header className='fixed top-0 left-0 right-0 z-40'>
             <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
                 {/* Логотип */}
                 <a href="/" className="text-2xl font-bold text-gray-200 flex-none">
-                    ММСП{section}
+                    ММСП
                 </a>
 
                 {/* Меню для мобильных устройств */}
@@ -156,7 +186,7 @@ interface ScrollLinkProps {
     to: string; // Селектор элемента, к которому нужно прокрутить
     className: string; // Классы для ScrollLink для кастомизации с помощью Tailwind
     children: React.ReactNode; // Содержимое ссылки
-    setSection: Function; // Функция для управления стейтом для переключения отображения активной страницы
+    setSection:  React.Dispatch<React.SetStateAction<string>>; // Функция для управления стейтом для переключения отображения активной страницы
 }
 
 const ScrollLink: React.FC<ScrollLinkProps> = ({ to, children, className }) => {
@@ -181,7 +211,7 @@ const ScrollLink: React.FC<ScrollLinkProps> = ({ to, children, className }) => {
                 duration: .5,
                 scrollTo: { y: scrollToPosition, autoKill: false }
             });
-        };
+        }
     };
 
     return (
