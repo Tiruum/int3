@@ -7,8 +7,11 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger) 
 
+interface Props {
+    setShowContact: (show: boolean) => void;
+}
 
-const Header: React.FC = () => {
+const Header: React.FC<Props> = ({ setShowContact }) => {
     // Состояние для открытия/закрытия меню на мобильных устройствах
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const [section, setSection] = useState<string>('#intro')
@@ -161,8 +164,8 @@ const Header: React.FC = () => {
                     ))}
                 </nav>
 
-                <button className="hidden md:flex flex-none bg-gray-950/50 backdrop-blur-md text-gray-200 ubuntu-mono-regular uppercase px-6 py-3 border-2 border-gray-500 transition-all hover:border-gray-200 rounded-full">
-                    <span className='border-2 border-transparent'>Связаться с нами</span>
+                <button onClick={() => setShowContact(true)} className="hidden md:flex flex-none bg-gray-950/50 backdrop-blur-md text-gray-200 ubuntu-mono-regular uppercase px-6 py-3 border-2 border-gray-500 transition-all hover:border-gray-200 rounded-full cursor-pointer">
+                    <span className='border-2 border-transparent cursor-pointer'>Связаться с нами</span>
                 </button>
             </div>
 

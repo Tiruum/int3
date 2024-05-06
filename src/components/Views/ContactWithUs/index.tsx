@@ -1,12 +1,12 @@
 import React from "react";
 
 interface Props {
-
+    setShowContact: (show: boolean) => void;
 }
 
-const ContactWithUs: React.FC<Props> = () => {
+const ContactWithUs: React.FC<Props> = ({ setShowContact }) => {
     return (
-        <>
+        <div className={`space-y-8 cursor-pointer`} onClick={() => setShowContact(true)}>
             <h2 className={`font-bold text-2xl`}>ММСП</h2>
             <div className={`flex flex-col gap-4`}>
                 <h1 className={'font-bold text-white text-4xl leading-[125%]'}>Получите подробную информацию</h1>
@@ -17,7 +17,7 @@ const ContactWithUs: React.FC<Props> = () => {
             <button className="hover:bg-black px-6 py-2 rounded-full bg-gray-100 text-blue-800 font-semibold text-lg">Связаться
                 с нами
             </button>
-        </>
+        </div>
     )
 }
 

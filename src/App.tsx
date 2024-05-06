@@ -21,33 +21,41 @@ const App: React.FC = () => {
         <div className="text-white overflow-hidden">
             <Preloader/>
             {showContact && <ContactForm setShowContact={setShowContact}/>}
-            <Header/>
+            <Header setShowContact={setShowContact} />
             <CustomCursor/>
+
             <Intro id={'intro'}/>
+
             <Section id={'description'}>
                 <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10'/>
                 <Description />
             </Section>
+
             <Section id={'functions'}>
                 <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 rotate-180'/>
                 <Functions/>
             </Section>
+
             <Section id={'benefits'} className={`bg-gradient-to-br from-blue-900/50 to-blue-900/30 rounded-3xl`}>
                 <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10'/>
                 <Benefits/>
             </Section>
+
             <Section id={'scenarios'}>
                 <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 rotate-180'/>
                 <Scenarios />
             </Section>
+
             <Section id={'contactWithUs'}
-                     className={`bg-gradient-to-r from-blue-800 to-indigo-900 rounded-3xl space-y-8 overflow-hidden`}>
-                <ContactWithUs />
+                     className={`bg-gradient-to-r from-blue-800 to-indigo-900 rounded-3xl overflow-hidden`}>
+                <ContactWithUs setShowContact={setShowContact} />
                 <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-180'/>
             </Section>
+
             <Section id={'visualisation'}>
                 <Visualisation />
             </Section>
+
             <Footer/>
         </div>
     )

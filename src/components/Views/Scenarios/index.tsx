@@ -104,7 +104,7 @@ const Scenarios: React.FC<ScenariosProps> = () => {
             {
                 showOverlay !== 0 &&
                 <div className={`fixed top-0 left-0 right-0 h-screen lg:p-24 p-0 z-50`}>
-                    <div className={`bg-purple-950/50 backdrop-blur-xl rounded-3xl lg:p-12 p-6 overflow-y-auto`}>
+                    <div className={`bg-purple-950/50 backdrop-blur-xl rounded-3xl lg:p-12 p-6 overflow-y-auto h-full`}>
                         <Xmark
                             className={`absolute lg:right-12 right-6 lg:top-12 top-6 text-purple-200 w-8 h-8 flex-none cursor-pointer`}
                             onClick={() => setShowOverlay(0)}/>
