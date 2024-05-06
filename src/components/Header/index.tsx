@@ -168,10 +168,11 @@ const Header: React.FC = () => {
 
             {/* Выпадающее меню для мобильных устройств */}
             {isMenuOpen && (
-                <div className="md:hidden">
-                    <nav className="flex flex-col space-y-2">
+                <div className={`md:hidden fixed top-0 left-0 right-0 h-screen lg:p-24 p-0 z-50 bg-black/50 backdrop-blur-xl`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    <nav className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col space-y-4 items-center">
                         {headerList.map((headerItem: HeaderItem) => (
-                            <ScrollLink to={headerItem.url} key={headerItem.value} setSection={setSection} className={`hover:text-cyan-400 rounded-full px-4 py-1.5 transition-all border-2 ${section === headerItem.url ? 'border-gray-400' : 'border-transparent'}`}>
+                            <ScrollLink to={headerItem.url} key={headerItem.value} setSection={setSection}
+                                        className={`hover:text-cyan-400 rounded-full px-4 py-1.5 transition-all border-2 text-lg font-light ${section === headerItem.url ? 'border-gray-400' : 'border-transparent'}`}>
                                 {headerItem.value}
                             </ScrollLink>
                         ))}
