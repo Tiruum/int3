@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
+import AnimatedText from "../../AnimatedText";
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -55,15 +56,15 @@ const Functions: React.FC<FunctionsProps> = () => {
             gsap.to(container, {
                 yPercent: -100 * (functionalObj.length - 1),
                 ease: "none",
-                duration: 2,
+                duration: 10,
                 scrollTrigger: {
                     id: 'functions-scroll',
                     trigger: "#functions",
                     start: "center center",
                     pin: "#functions", // Закрепляем элемент, чтобы он не скроллился вместе с страницей
                     scrub: 1, // Плавная анимация синхронизированная со скроллом
-                    end: () => "+=" + container.offsetHeight, // Окончание анимации на конце элемента
-                    snap: 1 / (functionalObj.length - 1),
+                    end: () => "+=" + container.offsetHeight * 2, // Окончание анимации на конце элемента
+                    // snap: 1 / (functionalObj.length - 1),
                     onUpdate: (self) => setProgressHeight(Number(self.progress.toFixed(2))),
                     pinSpacing: true, // Добавление дополнительного пространства для закрепления
                     // markers: true,
@@ -77,8 +78,8 @@ const Functions: React.FC<FunctionsProps> = () => {
                 scrollTrigger: {
                     trigger: '#functions',
                     start: "center center",
-                    end: () => "+=" + container.offsetHeight,
-                    snap: 1 / (functionalObj.length - 1),
+                    end: () => "+=" + container.offsetHeight * 2,
+                    // snap: 1 / (functionalObj.length - 1),
                     scrub: 1,
                 }
             })
@@ -93,8 +94,7 @@ const Functions: React.FC<FunctionsProps> = () => {
 
     return (
         <>
-            <p className='font-bold text-white text-5xl leading-[125%] mb-8'>Функционал
-                программного комплекса</p>
+            <AnimatedText text={'Функционал программного комплекса'} className='font-bold text-white text-5xl leading-[125%] mb-12' />
             <div className="grid xl:grid-cols-2 grid-cols-1 gap-8">
                 <div className={`border-bottom-2 flex gap-8 overflow-y-hidden h-96`}>
                     <div className={`relative w-2 h-full bg-gray-700`}>

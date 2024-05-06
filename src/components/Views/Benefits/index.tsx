@@ -11,14 +11,14 @@ import {
 } from "@gravity-ui/icons";
 import React from "react";
 import Box from "../../Box";
+import AnimatedText from "../../AnimatedText";
 
 const Benefits: React.FC = () => {
 
     return (
         <>
-            <p className='font-bold text-white text-5xl leading-[125%] mb-12'>Преимущества программного
-                комплекса</p>
-            <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-8 gap-4'>
+            <AnimatedText text={'Преимущества программного комплекса'} className='font-bold text-white text-5xl leading-[125%] mb-12' />
+            <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-8 gap-4'>
 
                 <Box Icon={ArrowsRotateLeft} description={'Автоматизация обработки результатов и снижение влияния человеческого фактора'} color={'blue'} />
                 <Box Icon={Calculator} description={'Акцент на расчетах многоспутниковых группировок и большого числа объектов'} color={'blue'} />

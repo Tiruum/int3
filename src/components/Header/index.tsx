@@ -36,7 +36,7 @@ const Header: React.FC = () => {
             url: '#scenarios'
         }, {
             value: 'Визуализация',
-            url: '#visualization'
+            url: '#visualisation'
         }
     ]
 
@@ -102,14 +102,14 @@ const Header: React.FC = () => {
             }
         });
 
-        gsap.to("#visualization", {
+        gsap.to("#visualisation", {
             scrollTrigger: {
-                trigger: "#visualization", // элемент триггер
+                trigger: "#visualisation", // элемент триггер
                 start: "top center", // когда верх элемента достигает центра
                 end: "bottom center", // когда низ элемента покидает центр
-                onEnter: () => setSection('#visualization'), // срабатывает, когда элемент входит в область
+                onEnter: () => setSection('#visualisation'), // срабатывает, когда элемент входит в область
                 onLeave: () => {}, // срабатывает, когда элемент покидает область
-                onEnterBack: () => setSection('#visualization'), // срабатывает, когда возвращается в область сверху
+                onEnterBack: () => setSection('#visualisation'), // срабатывает, когда возвращается в область сверху
                 onLeaveBack: () => {} // срабатывает, когда покидает область снизу
             }
         });

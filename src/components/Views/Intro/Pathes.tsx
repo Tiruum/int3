@@ -12,7 +12,7 @@ const Path1: React.FC<{ className: string }> = ({className}) => {
     useEffect(() => {
         satellite1Ref.current &&
         gsap.to(satellite1Ref.current, {
-            duration: 5,
+            duration: 12,
             ease: "none",
             repeat: -1,
             delay: 1,
@@ -48,7 +48,7 @@ const Path2: React.FC<{ className: string }> = ({className}) => {
     useEffect(() => {
         satellite2Ref.current &&
         gsap.to(satellite2Ref.current, {
-            duration: 5,
+            duration: 8,
             ease: "none",
             repeat: -1,
             motionPath: {
