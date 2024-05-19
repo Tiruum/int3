@@ -12,7 +12,7 @@ import objectsWEBP from './test/res/objects.webp'
 import messagesWEBP from './test/res/messages.webp'
 import { ArrowLeftFromLine } from "@gravity-ui/icons"
 
-export const Earth: FunctionComponent<{className: string, setFullscreen: Function, fullscreen: boolean, ifControls: boolean}> = ({className, setFullscreen, fullscreen, ifControls}) => {
+export const Earth: FunctionComponent<{className: string, setFullscreen: (fullscreen: boolean) => void, fullscreen: boolean, ifControls: boolean}> = ({className, setFullscreen, fullscreen, ifControls}) => {
     useEffect(() => {
     window.onload = () => {
         const nameElement = document.querySelector("#name") as HTMLDivElement;
@@ -30,12 +30,13 @@ export const Earth: FunctionComponent<{className: string, setFullscreen: Functio
         const res = "./src/components/Earth/build/res/";
         renderer.loadTextures(res + "lowp/");
 
+        // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
         renderState.time = 1679374800. * 1000.;
 
-        var moveX = 0.;
-        var moveY = 0.;
-        var moveZ = 0.;
-        var moveSensivity = 1.;
+        let moveX = 0.;
+        let moveY = 0.;
+        let moveZ = 0.;
+        let moveSensivity = 1.;
 
         const clamp = (x: number, xmin: number, xmax: number) => Math.min(xmax, Math.max(xmin, x));
         
@@ -60,7 +61,7 @@ export const Earth: FunctionComponent<{className: string, setFullscreen: Functio
                 nameNode.nodeValue = "";
             }
 
-            var date = new Date(1970, 0, 1);
+            const date = new Date(1970, 0, 1);
             date.setTime(renderState.time);
             timeNode.nodeValue = date.toString();
 
@@ -99,7 +100,7 @@ export const Earth: FunctionComponent<{className: string, setFullscreen: Functio
         renderState.groupPointShape[7] = 0;
         renderState.groupPointShape[8] = 5;
 
-        var sat = new Image();
+        const sat = new Image();
         sat.src = trajectoriesWEBP;
         sat.onload = () =>
         {
@@ -107,18 +108,18 @@ export const Earth: FunctionComponent<{className: string, setFullscreen: Functio
 
             renderer.groupSatellites(groupsJSON["group"]);
 
-            var capture = new Image();
+            const capture = new Image();
             capture.src = remote_sensing_devicesWEBP;
             capture.onload = () => {renderer.loadCapture(capture);};
         };
 
-        var obj = new Image();
+        const obj = new Image();
         obj.src = objectsWEBP;
         obj.onload = () => {
             renderer.load3DObject(obj);
         };
 
-        var comms = new Image();
+        const comms = new Image();
         comms.src = messagesWEBP;
         comms.onload = () => {
             renderer.loadCommunications(comms);
@@ -197,8 +198,7 @@ export const Earth: FunctionComponent<{className: string, setFullscreen: Functio
     
                 if(e.key == "y")
                 {
-                    renderer.postponed.push
-                    (
+                    renderer.postponed.push(
                         (gl: any) =>
                         {
                             const pixels = new Uint8Array(canvas.width * canvas.height * 4);
@@ -217,8 +217,8 @@ export const Earth: FunctionComponent<{className: string, setFullscreen: Functio
     
                             const ctx = cvs.getContext("2d");
                             ctx!.putImageData(new ImageData(data, canvas.width, canvas.height), 0, 0);
-    
-                            var link = document.createElement('a');
+
+                            const link = document.createElement('a');
                             link.setAttribute("download", "screenshot.png");
                             link.setAttribute("href", cvs.toDataURL("image/png").replace("image/png", "image/octet-stream"));
                             link.click();
@@ -335,7 +335,7 @@ export const Earth: FunctionComponent<{className: string, setFullscreen: Functio
             };
         }
     }
-    }, [])
+    }, [ifControls])
     
 
     return (
@@ -344,8 +344,8 @@ export const Earth: FunctionComponent<{className: string, setFullscreen: Functio
             <div id="timeOverlay" className="absolute top-0 left-0 text-white">
                 <div className="relative flex flex-col gap-2">
                     {
-                        !!fullscreen &&
-                        <button className="text-slate-300 leading-0 border-2 border-slate-300 rounded-lg p-1 w-fit" onClick={() => setFullscreen()}>{fullscreen && <ArrowLeftFromLine className="w-6 h-6" />}</button>
+                        fullscreen &&
+                        <button className="text-slate-300 leading-0 border-2 border-slate-300 rounded-lg p-1 w-fit" onClick={() => setFullscreen(!fullscreen)}>{fullscreen && <ArrowLeftFromLine className="w-6 h-6" />}</button>
                     }
                     <span id="time" className={`${fullscreen ? 'block' : 'hidden'}`}></span>
                 </div>
