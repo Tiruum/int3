@@ -1,4 +1,4 @@
-import {FunctionComponent, useEffect, useState} from "react"
+import {FunctionComponent, useEffect} from "react"
 import {WebGLRenderer} from "./build/src/webgl_renderer"
 import {RenderState} from "./build/src/render_state"
 import {onWheel, onMouseMove} from "./build/src/on_canvas_events.ts"
@@ -11,6 +11,7 @@ import remote_sensing_devicesWEBP from './test/res/remote_sensing_devices.webp'
 import objectsWEBP from './test/res/objects.webp'
 import messagesWEBP from './test/res/messages.webp'
 import {ArrowLeftFromLine, CaretLeft, CaretRight} from "@gravity-ui/icons"
+
 
 export const Earth: FunctionComponent<{className: string, setFullscreen: (fullscreen: boolean) => void, fullscreen: boolean, ifControls: boolean}> = ({className, setFullscreen, fullscreen, ifControls}) => {
 
@@ -29,7 +30,7 @@ export const Earth: FunctionComponent<{className: string, setFullscreen: (fullsc
             const renderState = new RenderState() as RenderState;
             const renderer = new WebGLRenderer(canvas, renderState);
             const res = "./src/components/Earth/build/res/";
-            renderer.loadTextures(res + "lowp/");
+            renderer.loadTextures("./build/res/lowp");
 
             // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
             renderState.time = 1679374800. * 1000.;
@@ -200,7 +201,7 @@ export const Earth: FunctionComponent<{className: string, setFullscreen: (fullsc
                     if(e.key == "y")
                     {
                         renderer.postponed.push(
-                            (gl: any) =>
+                            (gl: WebGLRenderingContext) =>
                             {
                                 const pixels = new Uint8Array(canvas.width * canvas.height * 4);
                                 renderer.gl.bindFramebuffer(renderer.gl.READ_FRAMEBUFFER, renderer.buffer.frame.main);
