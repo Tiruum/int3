@@ -30,7 +30,7 @@ export const Earth: FunctionComponent<{className: string, setFullscreen: (fullsc
             const renderState = new RenderState() as RenderState;
             const renderer = new WebGLRenderer(canvas, renderState);
             const res = "./src/components/Earth/build/res/";
-            renderer.loadTextures("./build/res/lowp");
+            renderer.loadTextures("./build/res/lowp/");
 
             // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
             renderState.time = 1679374800. * 1000.;
