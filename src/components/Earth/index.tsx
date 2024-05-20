@@ -177,15 +177,21 @@ export const Earth: FunctionComponent<{className: string, setFullscreen: (fullsc
                 // var pointSize = 0;
                 window.onkeydown = (e) =>
                 {
-                    const m = 5;
+                    const m = 20;
                     if(e.key == "q")
                         renderState.camExposure *= m;
                     if(e.key == "a")
                         renderState.camExposure /= m;
                     if(e.key == "e")
-                        renderState.timeMultiplier *= m;
+                        if (renderState.timeMultiplier < 10*m) {
+                            renderState.timeMultiplier += m;
+                        }
                     if(e.key == "d")
-                        renderState.timeMultiplier /= m;
+                        if (renderState.timeMultiplier > 0) {
+                            renderState.timeMultiplier -= m;
+                        } else {
+                            renderState.timeMultiplier = 0;
+                        }
 
                     if(e.key == "r")
                     {
