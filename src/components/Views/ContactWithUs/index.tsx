@@ -10,7 +10,7 @@ const ContactWithUs: React.FC<Props> = ({ setShowContact }) => {
             <h2 className={`font-bold text-2xl`}>ММСП</h2>
             <div className={`flex flex-col gap-4`}>
                 <h1 className={'font-bold text-white text-4xl leading-[125%]'}>Получите подробную информацию</h1>
-                <p className={`text-lg text-fuchsia-100 lg:w-1/2`}>Заполните форму и мы свяжемся с вами для ответов на
+                <p className={`text-lg text-blue-100 lg:w-1/2`}>Заполните форму и мы свяжемся с вами для ответов на
                     любой
                     Ваш вопрос!</p>
             </div>

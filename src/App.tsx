@@ -53,8 +53,8 @@ const App: React.FC = () => {
             </Section>
 
             <Section id={'contactWithUs'}
-                     className={`bg-gradient-to-r from-blue-800 to-indigo-900 rounded-3xl overflow-hidden`}>
-                <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-180 -z-10'/>
+                     className={`bg-gradient-to-r from-blue-800/50 to-indigo-900/50 border border-blue-800 hover:border-blue-700 rounded-3xl overflow-hidden animate-gradient`}>
+                <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10'/>
                 <ContactWithUs setShowContact={setShowContact} />
             </Section>
 

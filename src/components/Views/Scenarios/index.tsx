@@ -104,23 +104,23 @@ const Scenarios: React.FC<ScenariosProps> = () => {
             {
                 showOverlay !== 0 &&
                 <div className={`fixed top-0 left-0 right-0 h-screen lg:p-24 p-0 z-50`}>
-                    <div className={`bg-purple-950/50 backdrop-blur-xl rounded-3xl lg:p-12 p-6 overflow-y-auto h-full`}>
+                    <div className={`bg-gray-950/50 backdrop-blur-xl border border-gray-600 rounded-3xl lg:p-12 p-6 overflow-y-auto h-full`}>
                         <Xmark
-                            className={`absolute lg:right-12 right-6 lg:top-12 top-6 text-purple-200 w-8 h-8 flex-none cursor-pointer`}
+                            className={`absolute lg:right-12 right-6 lg:top-12 top-6 text-red-300 w-8 h-8 flex-none cursor-pointer`}
                             onClick={() => setShowOverlay(0)}/>
-                        <h1 className='font-bold text-purple-50 text-4xl leading-[125%] mb-12'>{data[showOverlay - 1].title}</h1>
-                        <p className="text-purple-100">{data[showOverlay-1].description}</p>
+                        <h1 className='font-bold text-gray-50 text-4xl leading-[125%] mb-12'>{data[showOverlay - 1].title}</h1>
+                        <p className="text-gray-100">{data[showOverlay-1].description}</p>
 
                         <ol className="relative mt-8 border-s-2 border-purple-500 space-y-10">
                             {
                                 data[showOverlay-1].steps.map((step, index) => (
                                     <li className="ms-8" key={`${data[showOverlay-1]}_${index}`}>
-                                        <span className="absolute flex items-center justify-center w-6 h-6 bg-purple-900 rounded-full -start-3 ring-8 ring-purple-900/25">
-                                            <CircleCheckFill className="w-6 h-6 text-purple-300" aria-hidden="true" />
+                                        <span className="absolute flex items-center justify-center w-6 h-6 bg-purle-900 rounded-full -start-3 ring-8 ring-purple-900/25">
+                                            <CircleCheckFill className="w-6 h-6 text-purle-300" aria-hidden="true" />
                                         </span>
-                                        <h3 className="flex items-center mb-1 text-lg font-semibold text-purple-100">{step.title}</h3>
-                                        <time className="block mb-2 text-sm font-normal leading-none text-purple-300">{step.subtitle}</time>
-                                        <p className="mb-4 text-base font-normal text-purple-200">{step.description}</p>
+                                        <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-100">{step.title}</h3>
+                                        <time className="block mb-2 text-sm font-normal leading-none text-gray-300">{step.subtitle}</time>
+                                        <p className="mb-4 text-base font-normal text-gray-200">{step.description}</p>
                                     </li>
                                     ))
                                 }
@@ -134,9 +134,9 @@ const Scenarios: React.FC<ScenariosProps> = () => {
                     return (
                         <div key={id} className={`
                             group flex flex-col justify-center gap-4 rounded-xl p-6
-                            bg-gradient-to-br border from-purple-800 to-purple-950
+                            bg-gradient-to-br border from-purple-800/50 to-purple-950/50
                             border-purple-800 duration-300 ease-in-out
-                            hover:from-purple-700 hover:to-purple-900 hover:border-purple-700
+                            hover:from-purple-700/50 hover:to-purple-900/50 hover:border-purple-700
                             cursor-pointer transition-all`}
                              onClick={() => setShowOverlay(id)}>
                             {Icon && <Icon

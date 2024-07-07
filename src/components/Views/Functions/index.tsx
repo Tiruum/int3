@@ -114,7 +114,7 @@ const Functions: React.FC<FunctionsProps> = () => {
 
                 {
                     funcObj.map((obj: FunctionsObj, index: number) => (
-                        <Box key={`functions_${index}`} Icon={obj.icon} title={obj.title} description={obj.description} color={'blue'} col={true} />
+                        <Box key={`functions_${index}`} Icon={obj.icon} title={obj.title} description={obj.description} color={'green'} col={true} />
                     ))
                 }
             </div>
