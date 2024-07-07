@@ -84,12 +84,12 @@ const articles: Article[] = [
               {
                   [...displayArticles.current].map((article) => (
                       <div key={article.id}
-                           className='flex-none w-80 h-48 border border-slate-400 rounded-xl group transition-all p-5 hover:border-sky-500 bg-gray-950/50 backdrop-blur-sm'>
-                          <p className="text-slate-400 text-xs group-hover:text-sky-200">{article.source}</p>
-                          <p className="text-base text-pretty text-slate-100 group-hover:text-sky-100">{truncate(article.text)}</p>
+                           className='flex-none w-80 h-48 border rounded-xl group transition-all p-5 bg-gradient-to-bl from-violet-900/50 to-violet-950/50 border-violet-800'>
+                          <p className="text-violet-300 text-xs group-hover:text-violet-200">{article.source}</p>
+                          <p className="text-base text-pretty text-slate-100 group-hover:text-violet-100">{truncate(article.text)}</p>
 
                           <a href={article.url} target="_blank"
-                             className="text-base mt-auto font-bold text-sky-500 group-hover:text-sky-50 flex items-center">Перейти
+                             className="text-base mt-auto font-bold text-violet-500 group-hover:text-violet-50 flex items-center">Перейти
                               к статье <ChevronRight/></a>
                       </div>
                   ))

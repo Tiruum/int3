@@ -11,25 +11,25 @@ interface BoxProps {
 
 const colorVariants = {
     blue: {
-        box: 'from-blue-900/50 to-blue-950/50 border-blue-800 ',
+        box: 'from-blue-900/50 to-blue-950/50 border-blue-800',
         icon: 'text-blue-400',
         title: 'text-blue-50',
         description: 'text-blue-200'
     },
     red: {
-        box: 'from-red-900 to-red-950 border-red-800 ',
+        box: 'from-red-900/50 to-red-950/50 border-red-800',
         icon: 'text-red-400',
         title: 'text-red-50',
         description: 'text-red-200'
     },
     yellow: {
-        box: 'from-yellow-900 to-yellow-950 border-yellow-800 ',
+        box: 'from-yellow-900/50 to-yellow-950/50 border-yellow-800',
         icon: 'text-yellow-400',
         title: 'text-yellow-50',
         description: 'text-yellow-200'
     },
     green: {
-        box: 'from-green-900/50 to-green-950/50 border-green-800 ',
+        box: 'from-green-900/50 to-green-950/50 border-green-800',
         icon: 'text-green-400',
         title: 'text-green-50',
         description: 'text-green-200'
