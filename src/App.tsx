@@ -1,4 +1,4 @@
-import CustomCursor from "./components/CustomCursor"
+// import CustomCursor from "./components/CustomCursor"
 import Header from "./components/Header"
 import './App.css'
 import Preloader from "./components/Preloader"
@@ -14,6 +14,8 @@ import Functions from "./components/Views/Functions";
 import ContactWithUs from "./components/Views/ContactWithUs";
 import Visualisation from "./components/Views/Visualisation";
 import Description from "./components/Views/Description";
+import {Media} from "./components/Views/Media";
+import Articles from "./components/Views/Articles";
 
 const App: React.FC = () => {
     const [showContact, setShowContact] = useState<boolean>(false)
@@ -22,7 +24,7 @@ const App: React.FC = () => {
             <Preloader/>
             {showContact && <ContactForm setShowContact={setShowContact}/>}
             <Header setShowContact={setShowContact} />
-            <CustomCursor/>
+            {/*<CustomCursor/>*/}
 
             <Intro id={'intro'}/>
 
@@ -46,15 +48,23 @@ const App: React.FC = () => {
                 <Scenarios />
             </Section>
 
-            <Section id={'contactWithUs'}
-                     className={`bg-gradient-to-r from-blue-800 to-indigo-900 rounded-3xl overflow-hidden`}>
-                <ContactWithUs setShowContact={setShowContact} />
-                <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-180'/>
-            </Section>
-
             <Section id={'visualisation'}>
                 <Visualisation />
             </Section>
+
+            <Section id={'contactWithUs'}
+                     className={`bg-gradient-to-r from-blue-800 to-indigo-900 rounded-3xl overflow-hidden`}>
+                <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-180 -z-10'/>
+                <ContactWithUs setShowContact={setShowContact} />
+            </Section>
+
+            <Section id={'mediaAndArticles'} className={`space-y-12`}>
+                <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 rotate-180'/>
+                <Media />
+                <Articles/>
+            </Section>
+
+
 
             <Footer/>
         </div>

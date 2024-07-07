@@ -13,7 +13,7 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className }) => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const chars = containerRef.current?.children;
+        const chars = containerRef.current?.querySelectorAll('.char');
         if (chars) {
             gsap.fromTo(chars, {
                 y: 50,
@@ -36,9 +36,15 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className }) => {
 
     return (
         <div ref={containerRef} className={`${className} overflow-hidden`}>
-            {text.split('').map((char, index) => (
-                <span key={index} className={'inline-block'}>
-                    {char === ' ' ? '\u00A0' : char}
+            {text.split(' ').map((word, index) => (
+                <span key={index} className="word inline-block">
+                    {word.split('').map((char, charIndex) => (
+                        <span key={charIndex} className="char inline-block">
+                            {char}
+                        </span>
+                    ))}
+                    {/* Add a space after each word, but don't animate the space */}
+                    <span className="char inline-block">&nbsp;</span>
                 </span>
             ))}
         </div>

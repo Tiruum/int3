@@ -1,6 +1,6 @@
 import {ChevronDownWide} from "@gravity-ui/icons";
 import {Path1, Path2} from "./Pathes.tsx";
-import {useEffect, useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import TextPlugin from 'gsap/TextPlugin';
 import {gsap} from "gsap";
 
@@ -21,31 +21,41 @@ const Intro: React.FC<{id: string}> = ({id}) => {
         <>
             <div id={id} className="relative w-full h-screen z-0">
                 <div
-                    className="flex flex-col justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none"
+                    className="absolute left-1/2 top-1/2 flex w-fit -translate-x-1/2 -translate-y-1/2 select-none flex-col items-center text-xs sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl"
                     id="title">
-                    <div className="flex items-center justify-center lg:mr-52 mr-16">
-                        <h1 className="lg:text-[100px] ubuntu-mono-regular text-[38px] maintext text-right leading-[0.8em] -z-10">ПРОГРАММНЫЙ<br/>КОМПЛЕКС
-                        </h1>
-                        {/* <div className="leading-[125%] font-light text-left lg:text-lg text-sm uppercase text-slate-400 -z-10 ml-4">Lorem ipsum dolor sit amet</div> */}
+                    <div className="flex items-center justify-center gap-2">
+                        <div
+                            className="ubuntu-mono-regular maintext -z-10 text-right text-[2.25em] leading-[0.9em]">
+                            ПРОГРАММНЫЙ<br/>КОМПЛЕКС
+                        </div>
+                        <div
+                            className="-z-10 text-left text-[0.875em] font-light uppercase leading-[1.05] text-slate-400">
+                            Проектирование<br/>многоспутниковых<br/>космических<br/>систем
+                        </div>
                     </div>
-                    <Path1 className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0' />
-                    <Path2 className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0' />
-                    <h1 className="lg:text-[130px] ubuntu-mono-bold font-mono text-[46px] text-blue-500 lg:ml-52 ml-16 text-left leading-tight font-bold lg:-mt-6 -mt-2 -z-10" id="integral">!N736r2@|_</h1>
+                    <Path1 className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0'/>
+                    <Path2 className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0'/>
+                    <div className="ml-auto font-mono text-[3em] font-bold leading-none text-blue-500"
+                         id="integral">!N736r2@|_
+                    </div>
                 </div>
                 <Cross className='absolute left-1/4 top-2/3'/>
                 <Cross className='absolute left-[65%] top-[10%] rotate-45 w-10'/>
 
-                 {/*Gradient ellipses */}
-                {/*<div className='absolute top-0 right-0 bg-gradient-radial-sky-500 w-full aspect-square opacity-20 translate-x-1/2 -translate-y-1/2 -z-10'></div>*/}
-                {/*<div className='absolute left-0 bottom-0 bg-gradient-radial-sky-500 w-full aspect-square opacity-[15%] -translate-x-1/2 translate-y-3/4 -z-10'></div>*/}
+                {/*Gradient ellipses */}
+                <div
+                    className='absolute top-0 right-0 bg-gradient-radial-sky-500 w-full aspect-square opacity-20 translate-x-1/2 -translate-y-1/2 -z-10'></div>
+                <div
+                    className='absolute left-0 bottom-0 bg-gradient-radial-red-500 w-full aspect-square opacity-[15%] -translate-x-1/2 translate-y-1/2 -z-10'></div>
 
             </div>
-            <ChevronDownWide id='ChevronDownWide' className='text-slate-100 w-8 h-8 flex-none mx-auto'/>
+            <ChevronDownWide id='ChevronDownWide'
+                             className='text-slate-100 w-8 h-8 flex-none absolute bottom-3 left-1/2 -translate-x-1/2'/>
         </>
     )
 }
 
-const Cross: React.FC<{className: string}> = ({className}) => {
+const Cross: React.FC<{ className: string }> = ({className}) => {
     const crossRef = useRef<SVGSVGElement>(null);
 
     useEffect(() => {

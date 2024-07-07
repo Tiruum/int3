@@ -4,9 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  cursor: none !important;
-}
+/** {*/
+/*  cursor: none !important;*/
+/*}*/
 
 .ubuntu-mono-regular {
     font-family: "Ubuntu Mono", monospace;
@@ -32,8 +32,20 @@
     font-style: italic;
 }
 
+.bg-gradient-radial-red-500 {
+    background: radial-gradient(circle, #f44336 0%, transparent 65%);
+}
+
+.bg-gradient-radial-sky-500 {
+    background: radial-gradient(circle, #03a9f4 0%, transparent 65%);
+}
+
 body::-webkit-scrollbar {
     width: 4px;
+}
+
+.hideScroll::-webkit-scrollbar {
+    display: none;
 }
 
 ::-webkit-scrollbar {

@@ -16,7 +16,7 @@ const Header: React.FC<Props> = ({ setShowContact }) => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const [section, setSection] = useState<string>('#intro')
 
-    type HeaderItem = {
+    interface HeaderItem {
         value: string,
         url: string
     }
@@ -132,7 +132,7 @@ const Header: React.FC<Props> = ({ setShowContact }) => {
                 </a>
 
                 {/* Меню для мобильных устройств */}
-                <div className="md:hidden">
+                <div className="lg:hidden">
                     {/* Иконка бургер-меню, клик по которой открывает/закрывает меню */}
                     <button
                         className="text-white focus:outline-none focus:text-white"
@@ -156,7 +156,7 @@ const Header: React.FC<Props> = ({ setShowContact }) => {
                 </div>
 
                 {/* Навигационное меню для больших устройств */}
-                <nav className="hidden md:flex space-x-0 flex-grow-0 bg-gray-950/50 backdrop-blur-md px-1.5 py-1.5 rounded-full text-gray-200 ubuntu-mono-regular uppercase border-2 border-neutral-500 shadow-md">
+                <nav className="hidden lg:flex space-x-0 flex-grow-0 bg-gray-950/50 backdrop-blur-md px-1.5 py-1.5 rounded-full text-gray-200 ubuntu-mono-regular uppercase border-2 border-neutral-500 shadow-md">
                     {headerList.map((headerItem: HeaderItem) => (
                         <ScrollLink to={headerItem.url} key={headerItem.value} setSection={setSection} className={`cursor-pointer hover:text-cyan-500 rounded-full px-4 py-1.5 transition-all border-2 ${section === headerItem.url ? 'border-gray-400' : 'border-transparent'}`}>
                             {headerItem.value}
@@ -164,14 +164,14 @@ const Header: React.FC<Props> = ({ setShowContact }) => {
                     ))}
                 </nav>
 
-                <button onClick={() => setShowContact(true)} className="hidden md:flex flex-none bg-gray-950/50 backdrop-blur-md text-gray-200 ubuntu-mono-regular uppercase px-6 py-3 border-2 border-gray-500 transition-all hover:border-gray-200 rounded-full cursor-pointer">
+                <button onClick={() => setShowContact(true)} className="hidden lg:flex flex-none bg-gray-950/50 backdrop-blur-md text-gray-200 ubuntu-mono-regular uppercase px-6 py-3 border-2 border-gray-500 transition-all hover:border-gray-200 rounded-full cursor-pointer">
                     <span className='border-2 border-transparent cursor-pointer'>Связаться с нами</span>
                 </button>
             </div>
 
             {/* Выпадающее меню для мобильных устройств */}
             {isMenuOpen && (
-                <div className={`md:hidden fixed top-0 left-0 right-0 h-screen lg:p-24 p-0 z-50 bg-black/50 backdrop-blur-xl`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <div className={`lg:hidden fixed top-0 left-0 right-0 h-screen lg:p-24 p-0 z-50 bg-black/50 backdrop-blur-xl`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <nav className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col space-y-4 items-center">
                         {headerList.map((headerItem: HeaderItem) => (
                             <ScrollLink to={headerItem.url} key={headerItem.value} setSection={setSection}
