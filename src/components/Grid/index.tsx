@@ -1,3 +1,5 @@
+import React from "react";
+
 const Grid: React.FC<{className: string}> = ({className}) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="1394" height="797" viewBox="0 0 1394 797" fill="none" className={className}>

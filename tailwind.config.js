@@ -6,7 +6,11 @@ export default {
   ],
   safelist: [],
   theme: {
-    extend: {},
+    extend: {
+      backdropBlur: {
+        xs: '2px',
+      }
+    },
   },
   plugins: [],
 }

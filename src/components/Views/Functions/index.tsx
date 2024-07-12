@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useRef} from "react";
 import { MdModelTraining, MdOutlineSpaceDashboard, MdOutlineSignalCellularAlt, MdOutlineVisibility } from 'react-icons/md';
 import { IoEarthOutline } from 'react-icons/io5';
 import { AiTwotoneExperiment } from "react-icons/ai";
 import { IconType } from 'react-icons';import AnimatedText from "../../AnimatedText";
 import Box from "../../Box";
+import gsap from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import {useGSAP} from "@gsap/react";
 
-// gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger)
 
 interface FunctionsProps {
 }
@@ -106,11 +109,32 @@ const Functions: React.FC<FunctionsProps> = () => {
     // }, [functionalObj.length]);
 
     // const progressContainer = useRef<HTMLDivElement>(null)
+    const functionsRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        if (functionsRef.current) {
+            gsap.fromTo(functionsRef.current.children,
+                {
+                    opacity: 0,
+                }, {
+                    opacity: 1,
+                    duration: 0.7,
+                    delay: 0,
+                    ease: 'power1.inOut',
+                    stagger: .2/2,
+                    scrollTrigger: {
+                        trigger: functionsRef.current,
+                        start: "top 75%",
+                        toggleActions: "play none none reverse",
+                    },
+                });
+        }
+    }, { scope: functionsRef })
 
     return (
         <>
             <AnimatedText text={'Функционал программного комплекса'} className='font-bold text-white text-5xl leading-[125%] mb-12' />
-            <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-8 gap-4'>
+            <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-8 gap-4' ref={functionsRef}>
 
                 {
                     funcObj.map((obj: FunctionsObj, index: number) => (

@@ -24,7 +24,10 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className }) => {
                 duration: 0.25,
                 ease: 'power1.inOut',
                 delay: 0,
-                stagger: 0.03,
+                stagger: {
+                    each: 0.03,
+                    from: 'start'
+                },
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top 75%",

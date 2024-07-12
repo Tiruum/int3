@@ -80,11 +80,12 @@ const articles: Article[] = [
           <div ref={scrollContainerRef}
                onMouseEnter={handleMouseEnter}
                onMouseLeave={handleMouseLeave}
-               className="overflow-x-auto gap-5 flex items-center hideScroll">
+               className="overflow-x-auto gap-5 flex items-center hideScroll"
+               style={{WebkitMask: "linear-gradient( to left, rgb(0, 0, 0, 0) 0%, rgb(0, 0, 0, 1) 5%, rgb(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 100% )"}}>
               {
                   [...displayArticles.current].map((article) => (
                       <div key={article.id}
-                           className='flex-none w-80 h-48 border rounded-xl group transition-all p-5 bg-gradient-to-bl from-violet-900/50 hover:from-violet-800/50 to-violet-950/50 hover:to-violet-900/50 border-violet-800 hover:border-violet-700'>
+                           className='flex-none w-80 h-48 backdrop-blur-xs border rounded-xl group transition-all p-5 bg-gradient-to-bl from-violet-900/50 hover:from-violet-800/50 to-violet-950/50 hover:to-violet-900/50 border-violet-800 hover:border-violet-700'>
                           <p className="text-violet-300 text-xs group-hover:text-violet-200">{article.source}</p>
                           <p className="text-base text-pretty text-slate-100 group-hover:text-violet-100">{truncate(article.text)}</p>
 

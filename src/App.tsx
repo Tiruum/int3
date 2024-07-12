@@ -23,14 +23,14 @@ const App: React.FC = () => {
         <div className="text-white overflow-hidden">
             <Preloader/>
             {showContact && <ContactForm setShowContact={setShowContact}/>}
-            <Header setShowContact={setShowContact} />
+            <Header setShowContact={setShowContact}/>
             {/*<CustomCursor/>*/}
 
             <Intro id={'intro'}/>
 
             <Section id={'description'}>
                 <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10'/>
-                <Description />
+                <Description/>
             </Section>
 
             <Section id={'functions'}>
@@ -45,25 +45,24 @@ const App: React.FC = () => {
 
             <Section id={'scenarios'}>
                 <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 rotate-180'/>
-                <Scenarios />
+                <Scenarios/>
             </Section>
 
             <Section id={'visualisation'}>
-                <Visualisation />
+                <Visualisation/>
             </Section>
 
             <Section id={'contactWithUs'}
                      className={`bg-gradient-to-r from-blue-800/50 to-indigo-900/50 border border-blue-800 hover:border-blue-700 rounded-3xl overflow-hidden animate-gradient`}>
                 <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10'/>
-                <ContactWithUs setShowContact={setShowContact} />
+                <ContactWithUs setShowContact={setShowContact}/>
             </Section>
 
             <Section id={'mediaAndArticles'} className={`space-y-12`}>
                 <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 rotate-180'/>
-                <Media />
+                <Media/>
                 <Articles/>
             </Section>
-
 
 
             <Footer/>

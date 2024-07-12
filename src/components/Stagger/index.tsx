@@ -22,12 +22,12 @@ const Stagger: React.FC = () => {
         gsap.fromTo(square, 
           { scale: 1 }, 
           {
-            scale: 3,
+            scale: 5,
             repeat: -1,
             yoyo: true,
             ease: "expo.inOut",
-            duration: 0.5,
-            delay: distance * 0.25
+            duration: 0.2,
+            delay: distance * 0.1
           }
         );
       });

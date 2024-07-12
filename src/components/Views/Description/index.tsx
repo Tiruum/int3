@@ -29,26 +29,37 @@ const features = [
 
 const Description: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null)
-    const container = containerRef.current
     useEffect(() => {
-        if (container) {
-            gsap.from(container?.children, { opacity: 0, y: 50, duration: .5, stagger: 0.3, scrollTrigger: {
+        if (containerRef.current) {
+            gsap.fromTo(containerRef.current.children,
+                {
+                    opacity: 0,
+                    y: 50,
+                },
+                {
+                opacity: 1,
+                y: 0,
+                duration: .4,
+                delay: 0,
+                stagger: 0.2,
+                scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top 75%",
                     toggleActions: "play none none reverse",
-                }, });
+                },
+            });
         }
-    }, [container]);
+    }, []);
     return (
         <>
             <AnimatedText text={'Описание'} className='font-bold text-white text-5xl leading-[125%] mb-12' />
             <h1 className="text-4xl font-bold text-center mb-8 ubuntu-mono-bold">
                 Первый российский программный комплекс для проектирования многоспутниковых космических систем
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 gap-8 feature-tile" ref={containerRef}>
+            <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 gap-8" ref={containerRef}>
                 {features.map((feature, index) => (
                     <div key={`description_${index}`}
-                         className={`p-6 rounded-xl lg:col-span-1 md:col-span-2 md:last:col-start-2 lg:last:col-start-3 transition-colors bg-gray-950/50 border ${feature.hoverBorderColor} duration-300`}>
+                         className={`p-6 rounded-xl lg:col-span-1 backdrop-blur-xs md:col-span-2 md:last:col-start-2 lg:last:col-start-3 transition-colors bg-gray-950/50 border ${feature.hoverBorderColor} duration-300`}>
                         <div className="flex justify-center mb-4">
                             {feature.icon}
                         </div>
