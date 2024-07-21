@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import { gsap } from 'gsap';
+import {gsap} from 'gsap';
 
 interface Props {
     children?: React.ReactNode;
@@ -7,7 +7,7 @@ interface Props {
     onClose: () => void;
 }
 
-export const Modal: React.FC<Props> = ({ children, isOpen, onClose }) => {
+export const Modal: React.FC<Props> = ({children, isOpen, onClose}) => {
     const modalRef = useRef<HTMLDivElement>(null);
     const [isAnimating, setIsAnimating] = useState(false);
 
@@ -16,15 +16,15 @@ export const Modal: React.FC<Props> = ({ children, isOpen, onClose }) => {
             setIsAnimating(true);
             gsap.fromTo(
                 modalRef.current,
-                { opacity: 0, y: -50 },
-                { opacity: 1, y: 0, duration: 0.3, onComplete: () => setIsAnimating(false) }
+                {opacity: 0, y: -50},
+                {opacity: 1, y: 0, duration: 0.3, onComplete: () => setIsAnimating(false)}
             );
         } else {
             setIsAnimating(true);
             gsap.fromTo(
                 modalRef.current,
-                { opacity: 1, y: 0 },
-                { opacity: 0, y: -50, duration: 0.3, onComplete: () => setIsAnimating(false) }
+                {opacity: 1, y: 0},
+                {opacity: 0, y: -50, duration: 0.3, onComplete: () => setIsAnimating(false)}
             );
         }
     }, [isOpen]);
