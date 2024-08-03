@@ -4,18 +4,20 @@ import './App.css'
 import Preloader from "./components/Preloader"
 import Footer from "./components/Footer";
 import React, {useState} from "react";
-import Intro from "./components/Views/Intro";
 import ContactForm from "./components/ContactForm";
 import Section from "./components/Section";
-import Benefits from "./components/Views/Benefits";
 import Grid from "./components/Grid";
-import Scenarios from "./components/Views/Scenarios";
-import Functions from "./components/Views/Functions";
-import ContactWithUs from "./components/Views/ContactWithUs";
-import Visualisation from "./components/Views/Visualisation";
-import Description from "./components/Views/Description";
-import {Media} from "./components/Views/Media";
-import Articles from "./components/Views/Articles";
+import {
+    Articles,
+    Benefits,
+    ContactWithUs,
+    Description,
+    Functions,
+    Intro,
+    Media,
+    Scenarios,
+    Visualisation
+} from "@/components/Views";
 
 const App: React.FC = () => {
     const [showContact, setShowContact] = useState<boolean>(false)

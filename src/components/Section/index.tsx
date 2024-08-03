@@ -10,7 +10,7 @@ interface SectionProps {
 
 const Section: React.FC<SectionProps> = ({className, children, id, style}) => {
     return (
-        <div id={id} style={style} className={`lg:w-11/12 w-full relative lg:p-12 md:p-8 p-6 mx-auto my-40 ${className}`}>
+        <div id={id} style={style} className={`container w-full relative lg:p-12 md:p-8 p-6 mx-auto my-40 ${className}`}>
             {children}
         </div>
     );
