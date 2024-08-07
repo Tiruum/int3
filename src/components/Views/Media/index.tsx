@@ -1,6 +1,10 @@
 import { ChevronRight } from "@gravity-ui/icons"
 import AnimatedText from "../../AnimatedText";
 import {useEffect, useRef, useState} from "react";
+import gsap from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import {useGSAP} from "@gsap/react";
+gsap.registerPlugin(ScrollTrigger)
 
 export const Media = () => {
     const truncate = (text: string):string => {
@@ -109,6 +113,7 @@ export const Media = () => {
     ].sort((one: Article, two: Article) => Number(two.date) - Number(one.date))
 
     const displayArticles = useRef(articles)
+    const [ifMask, setIfMask] = useState<boolean>(false)
 
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
@@ -120,6 +125,7 @@ export const Media = () => {
         if (scrollContainer) {
             if (scrollContainer.scrollWidth > window.innerWidth) {
                 displayArticles.current = [...articles, ...articles]
+                setIfMask(true)
                 scrollInterval = setInterval((): void => {
                     if (!isHovered) {
                         if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2 + 10) {
@@ -145,6 +151,26 @@ export const Media = () => {
         setIsHovered(false);
     };
 
+    useGSAP(() => {
+        if (scrollContainerRef.current) {
+            gsap.fromTo(scrollContainerRef.current.children,
+                {
+                    opacity: 0,
+                }, {
+                    opacity: 1,
+                    duration: 0.7,
+                    delay: 0,
+                    ease: 'power1.inOut',
+                    stagger: .2/2,
+                    scrollTrigger: {
+                        trigger: scrollContainerRef.current,
+                        start: "top 75%",
+                        toggleActions: "play none none reverse",
+                    },
+                });
+        }
+    }, { scope: scrollContainerRef })
+
     return (
         <>
             <AnimatedText text={'СМИ о нас'} className='font-bold text-white text-5xl leading-[125%] mb-12' />
@@ -152,7 +178,7 @@ export const Media = () => {
                  onMouseEnter={handleMouseEnter}
                  onMouseLeave={handleMouseLeave}
                  className="hideScroll overflow-x-auto gap-5 flex items-center relative"
-                 style={{WebkitMask: "linear-gradient( to left, rgb(0, 0, 0, 0) 0%, rgb(0, 0, 0, 1) 5%, rgb(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 100% )"}}>
+                 style={ifMask ? {WebkitMask: "linear-gradient( to left, rgb(0, 0, 0, 0) 0%, rgb(0, 0, 0, 1) 5%, rgb(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 100% )"} : {}}>
                 {
                     [...displayArticles.current].map((article: Article, index: number) => (
                         <div key={`${article.id}_${index}`}

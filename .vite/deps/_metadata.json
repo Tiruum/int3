@@ -1,0 +1,58 @@
+{
+  "hash": "4a955eeb",
+  "configHash": "e63c4a1b",
+  "lockfileHash": "b63604a7",
+  "browserHash": "29210bc4",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "53efdcf6",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "32bd2606",
+      "needsInterop": true
+    },
+    "gsap": {
+      "src": "../../node_modules/gsap/index.js",
+      "file": "gsap.js",
+      "fileHash": "9247ce8f",
+      "needsInterop": false
+    },
+    "gsap/ScrollTrigger": {
+      "src": "../../node_modules/gsap/ScrollTrigger.js",
+      "file": "gsap_ScrollTrigger.js",
+      "fileHash": "8114705b",
+      "needsInterop": false
+    },
+    "@gravity-ui/icons": {
+      "src": "../../node_modules/@gravity-ui/icons/esm/index.js",
+      "file": "@gravity-ui_icons.js",
+      "fileHash": "639047ce",
+      "needsInterop": false
+    },
+    "@emailjs/browser": {
+      "src": "../../node_modules/@emailjs/browser/es/index.js",
+      "file": "@emailjs_browser.js",
+      "fileHash": "c137bf3d",
+      "needsInterop": false
+    },
+    "gsap/ScrollToPlugin": {
+      "src": "../../node_modules/gsap/ScrollToPlugin.js",
+      "file": "gsap_ScrollToPlugin.js",
+      "fileHash": "5537e814",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-O6O4HUXW": {
+      "file": "chunk-O6O4HUXW.js"
+    },
+    "chunk-LQ2VYIYD": {
+      "file": "chunk-LQ2VYIYD.js"
+    }
+  }
+}

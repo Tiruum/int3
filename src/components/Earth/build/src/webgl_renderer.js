@@ -24,7 +24,7 @@ export class WebGLRenderer {
         this.canvas.width = 1;
         this.canvas.height = 1;
         const attributes = {
-            alpha: true,
+            //alpha: false,
             antialias: false,
             colorSpace: "srgb",
             depth: false,
@@ -228,9 +228,9 @@ export class WebGLRenderer {
                     for (let j = 0; j < lines.length; ++j) {
                         const line = lines[j];
                         pointCount += line.length;
-                        this.regionCenter[2 * i] += line.reduce((acc, point) => acc + point.longitude, 0);
-                        this.regionCenter[2 * i + 1] += line.reduce((acc, point) => acc + point.latitude, 0);
-                        const data = line.map(point => [point.longitude, point.latitude]).flat();
+                        this.regionCenter[2 * i] += line.longitude;
+                        this.regionCenter[2 * i + 1] += line.latitude;
+                        const data = [line.longitude, line.latitude].flat();
                         this.replaceTexture("polygon", createTextureFromArray(gl, gl.RG32F, line.length, 1, gl.RG, gl.FLOAT, new Float32Array(data)));
                         gl.drawArraysInstanced(gl.TRIANGLE_FAN, 0, line.length, 2);
                     }
@@ -447,14 +447,14 @@ export class WebGLRenderer {
         gl.activeTexture(gl.TEXTURE0);
         const setTimeUniforms = (shader, now0, now1) => {
             const i = leapSecondsInfo.leap_seconds.findIndex(info => info[0] >= now0 / 1000. + 2208988800);
-            const TAIminusUTC = leapSecondsInfo.leap_seconds.at(i == -1 ? -1 : Math.max(0, i - 1))[1];
+            const TAIminusUTC = Number(leapSecondsInfo.leap_seconds.at(i == -1 ? -1 : Math.max(0, i - 1))[1]);
             const msLeap = 1000. * (TAIminusUTC - 10);
             const ms0 = now0 + msLeap;
             const ms1 = now1 + msLeap;
             const msInDay = 86400 * 1000;
             const days0 = Math.floor(ms0 / msInDay);
             const days1 = Math.floor(ms1 / msInDay);
-            gl.uniform1f(gl.getUniformLocation(shader, "TTminusUT"), 32.184 + TAIminusUTC);
+            gl.uniform1f(gl.getUniformLocation(shader, "TTminusUT"), 1000. * (32.184 + TAIminusUTC));
             gl.uniform1i(gl.getUniformLocation(shader, "now.epoch"), 1);
             gl.uniform1i(gl.getUniformLocation(shader, "prev.epoch"), 1);
             gl.uniform1f(gl.getUniformLocation(shader, "now.interval.days"), days0);
@@ -464,7 +464,7 @@ export class WebGLRenderer {
         };
         const now0 = rs.time;
         const now1 = rs.time - dt;
-        const useProgram = (shader) => {
+        const GLUseProgram = (shader) => {
             gl.useProgram(shader);
             setTimeUniforms(shader, now0, now1);
         };
@@ -546,29 +546,40 @@ export class WebGLRenderer {
                 }
             }
         }
-        else if (this.satelliteCount != 0) {
-            gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, this.buffer.frame.satCoord);
-            gl.drawBuffers([gl.COLOR_ATTACHMENT0]);
-            gl.viewport(0, 0, this.satCoordWidth, this.satCoordHeight);
-            useProgram(this.shader.satCoord);
-            gl.drawArrays(gl.TRIANGLES, 0, 6);
+        else {
+            gl.disable(gl.BLEND);
+            gl.disable(gl.DEPTH_TEST);
+            if (this.satelliteCount != 0) {
+                gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, this.buffer.frame.satCoord);
+                gl.drawBuffers([gl.COLOR_ATTACHMENT0]);
+                gl.viewport(0, 0, this.satCoordWidth, this.satCoordHeight);
+                GLUseProgram(this.shader.satCoord);
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+            }
+            if (this.cameraCount != 0) {
+                gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, this.buffer.frame.camera);
+                gl.viewport(0, 0, this.cameraImageWidth, this.cameraImageHeight);
+                GLUseProgram(this.shader.capture);
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+            }
         }
         gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, this.buffer.frame.main);
         gl.drawBuffers([gl.COLOR_ATTACHMENT0, gl.COLOR_ATTACHMENT1]);
         gl.viewport(0, 0, this.canvas.width, this.canvas.height);
         if (rs.enableHover) {
-            const hoverX = Math.floor(rs.cursor[0] * this.canvas.width);
-            const hoverY = Math.floor(rs.cursor[1] * this.canvas.height);
+            let hoverX = Math.floor(rs.cursor[0] * this.canvas.width);
+            let hoverY = Math.floor(rs.cursor[1] * this.canvas.height);
             gl.bindFramebuffer(gl.READ_FRAMEBUFFER, this.buffer.frame.main);
             gl.readBuffer(gl.COLOR_ATTACHMENT1);
             gl.readPixels(hoverX, hoverY, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, rs.pick);
+            while (gl.getError() !== gl.NO_ERROR) console.log("Error after rs.enableHover")
         }
         gl.clearColor(0., 0., 0., 0.);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         gl.disable(gl.BLEND);
         gl.enable(gl.DEPTH_TEST);
         gl.depthFunc(gl.LEQUAL);
-        useProgram(this.shader.earth);
+        GLUseProgram(this.shader.earth);
         gl.drawArrays(gl.TRIANGLES, 0, 6);
         gl.enable(gl.BLEND);
         gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.SRC_ALPHA, gl.DST_ALPHA);
@@ -576,29 +587,29 @@ export class WebGLRenderer {
         gl.depthFunc(gl.LEQUAL);
         gl.depthMask(false);
         if (this.commsMaxCount != 0) {
-            useProgram(this.shader.commsLine);
+            GLUseProgram(this.shader.commsLine);
             gl.drawArraysInstanced(gl.LINES, 0, 2, this.commsMaxCount);
-            useProgram(this.shader.commsPoint);
+            GLUseProgram(this.shader.commsPoint);
             gl.drawArraysInstanced(gl.POINTS, 0, 1, this.commsMaxCount);
         }
         if (!rs.cam2D) {
             gl.depthMask(true);
-            useProgram(this.shader.moon);
+            GLUseProgram(this.shader.moon);
             gl.drawArrays(gl.TRIANGLES, 0, 6);
             if (this.satelliteCount != 0) {
                 if (this.meshCount != 0 && rs.camObjectID >= 0) {
                     gl.enable(gl.CULL_FACE);
                     gl.cullFace(gl.FRONT);
-                    useProgram(this.shader.object);
+                    GLUseProgram(this.shader.object);
                     gl.drawArrays(gl.TRIANGLES, 0, 36);
                     gl.disable(gl.CULL_FACE);
                 }
                 gl.depthMask(false);
-                useProgram(this.shader.orbit);
+                GLUseProgram(this.shader.orbit);
                 gl.uniform1ui(gl.getUniformLocation(this.shader.orbit, "orbitPointCount"), rs.orbitPointCount);
                 gl.drawArraysInstanced(gl.LINE_STRIP, 0, rs.orbitPointCount + 1, this.satelliteCount);
                 if (this.cameraCount != 0) {
-                    useProgram(this.shader.viewTriangle);
+                    GLUseProgram(this.shader.viewTriangle);
                     gl.uniform4f(gl.getUniformLocation(this.shader.viewTriangle, "uColor"), rs.satViewColor.r, rs.satViewColor.g, rs.satViewColor.b, rs.satViewColor.a);
                     gl.drawArraysInstanced(gl.TRIANGLES, 0, 3, this.cameraCount);
                 }
@@ -606,11 +617,11 @@ export class WebGLRenderer {
         }
         gl.depthMask(false);
         if (this.satelliteCount != 0) {
-            useProgram(this.shader.satellite);
+            GLUseProgram(this.shader.satellite);
             gl.drawArraysInstanced(gl.POINTS, 0, 1, this.satelliteCount);
         }
         if (this.stationCount != 0) {
-            useProgram(this.shader.station);
+            GLUseProgram(this.shader.station);
             gl.drawArraysInstanced(gl.POINTS, 0, 1, this.stationCount);
         }
         gl.depthMask(true);
@@ -620,6 +631,6 @@ export class WebGLRenderer {
         gl.drawBuffers([gl.BACK]);
         gl.blitFramebuffer(0, 0, this.canvas.width, this.canvas.height, 0, 0, this.canvas.width, this.canvas.height, gl.COLOR_BUFFER_BIT, gl.NEAREST);
         while (gl.getError() != gl.NO_ERROR)
-            console.log(`GL error after render`);
+            console.log("GL error after render");
     }
 }

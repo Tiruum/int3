@@ -1,0 +1,10 @@
+export const maxGroupId = 246;
+export const selectedGroupId = 247;
+export const selectedSMTId = 248;
+export const selectedStationGroupId = 249;
+export const selectedRegionGroupId = 250;
+export const regionGroup = 251;
+export const stationGroup = 252;
+export const opticalTelescopeGroup = 253;
+export const radioTelescopeGroup = 254;
+export const commsGroup = 255;

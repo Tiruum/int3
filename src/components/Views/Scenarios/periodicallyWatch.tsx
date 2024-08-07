@@ -1,15 +1,43 @@
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/carousel.tsx";
 
 export const PeriodicallyWatch = () => {
-    const slideshow = ['/scenarios/periodicallyWatch/00.png',
-        '/scenarios/periodicallyWatch/01.png',
-        '/scenarios/periodicallyWatch/02.png',
-        '/scenarios/periodicallyWatch/03.png',
-        '/scenarios/periodicallyWatch/04.png',
-        '/scenarios/periodicallyWatch/05.png',
-        '/scenarios/periodicallyWatch/06.png',
-        '/scenarios/periodicallyWatch/07.png',
-        '/scenarios/periodicallyWatch/08.png']
+    const slideshow = [
+        {
+            src: '/scenarios/periodicallyWatch/00.png',
+            label: 'Задание камеры ДЗЗ'
+        },
+        {
+            src: '/scenarios/periodicallyWatch/01.png',
+            label: 'Задание конструкции КА'
+        },
+        {
+            src: '/scenarios/periodicallyWatch/02.png',
+            label: 'Задание группировки КА'
+        },
+        {
+            src: '/scenarios/periodicallyWatch/03.png',
+            label: 'Задание точечных целей ДЗЗ'
+        },
+        {
+            src: '/scenarios/periodicallyWatch/04.png',
+            label: 'Запуск расчета'
+        },
+        {
+            src: '/scenarios/periodicallyWatch/05.png',
+            label: 'Произведенный расчет'
+        },
+        {
+            src: '/scenarios/periodicallyWatch/06.png',
+            label: 'Результаты по районам зондирования, таблица с параметрами съёмки'
+        },
+        {
+            src: '/scenarios/periodicallyWatch/07.png',
+            label: 'Просмотр циклограмм наблюдения каждой точки'
+        },
+        {
+            src: '/scenarios/periodicallyWatch/08.png',
+            label: 'Зависимость средней периодичности от широты'
+        }]
 
     return (
         <>
@@ -29,19 +57,16 @@ export const PeriodicallyWatch = () => {
                     <time className="block mb-2 text-sm font-normal leading-none text-gray-500 lg:w-1/2">Задание
                         необходимых данных для запуска расчета
                     </time>
-                    <p className="mb-4 text-base font-normal text-gray-200 lg:w-5/6">Задание камеры ДЗЗ</p>
-                    <p className="mb-4 text-base font-normal text-gray-200 lg:w-5/6">Задание конструкции КА</p>
-                    <p className="mb-4 text-base font-normal text-gray-200 lg:w-5/6">Задание группировки КА</p>
-                    <p className="mb-4 text-base font-normal text-gray-200 lg:w-5/6">Задание точечных целей ДЗЗ</p>
-                    <p className="mb-4 text-base font-normal text-gray-200 lg:w-5/6">Запуск расчета</p>
+                    <p className="mb-4 text-base font-normal text-gray-200 lg:w-5/6"></p>
                     {
                         slideshow &&
                         <Carousel className={'lg:w-5/6 w-full my-2'}>
                             <CarouselContent>
                                 {slideshow.map((image, i) => (
                                     i <= 4 &&
-                                    <CarouselItem key={`periodicallyWatch_image${image.slice(-6, -4)}`}>
-                                        <img src={image} alt=''
+                                    <CarouselItem key={`periodicallyWatch_image${image.src.slice(-6, -4)}`} className={'space-y-1'}>
+                                        <p className='text-center'>{image.label}</p>
+                                        <img src={image.src} alt=''
                                              className={'bg-white select-none rounded-xl'}/>
                                     </CarouselItem>
                                 ))
@@ -67,18 +92,15 @@ export const PeriodicallyWatch = () => {
                         широтном поясе определена зависимость средней периодичности от широты. Обнаружено, что средняя
                         периодичность обзора зависит от широты цели линейным образом и уменьшается с увеличением
                         широты.</p>
-                    <p className="mb-4 text-base font-normal text-gray-200 lg:w-5/6">Результаты по районам
-                        зондирования, таблица с параметрами съёмки</p>
-                    <p className="mb-4 text-base font-normal text-gray-200 lg:w-5/6">Просмотр циклограмм
-                        наблюдения каждой точки</p>
                     {
                         slideshow &&
                         <Carousel className={'lg:w-5/6 w-full my-2'}>
                             <CarouselContent>
                                 {slideshow.map((image, i) => (
                                     i > 4 &&
-                                    <CarouselItem key={`periodicallyWatch_image${image.slice(-6, -4)}`}>
-                                        <img src={image} alt=''
+                                    <CarouselItem key={`periodicallyWatch_image${image.src.slice(-6, -4)}`} className={'space-y-1'}>
+                                        <p className='text-center'>{image.label}</p>
+                                        <img src={image.src} alt=''
                                              className={'bg-white w-full select-none rounded-xl'}/>
                                     </CarouselItem>
                                 ))

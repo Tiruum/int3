@@ -1,0 +1,60 @@
+export class RGBAColor {
+    constructor(red?: number, green?: number, blue?: number, alpha?: number);
+    r: number;
+    g: number;
+    b: number;
+    a: number;
+}
+export class RenderState {
+    timeLerp(k: any): number;
+    pickInfo(): {
+        target: string;
+        ID: number;
+    };
+    setPickInfo(pick: any): void;
+    mouse(): number[];
+    setMouse(m: any): void;
+    mouse2D: number[];
+    mouse3D: number[];
+    time: number;
+    timeMultiplier: number;
+    maxFrameDelay: number;
+    orbitPointCount: number;
+    enableHover: boolean;
+    pick: Uint8Array;
+    pickSizeMultiplier: number;
+    pickColorMultiplier: number;
+    pretty: boolean;
+    multisample: boolean;
+    cleanSatLine: boolean;
+    cleanSatView: boolean;
+    cleanSatCapture: boolean;
+    cleanRegions: boolean;
+    satLineFade: number;
+    satViewFade: number;
+    satCaptureFade: number;
+    framesBetweenFade: number;
+    camObjectID: number;
+    cam2D: boolean;
+    camEclipticPlane: boolean;
+    camSynchronized: boolean;
+    camExposure: number;
+    sunsetColor: RGBAColor;
+    satLineColor: RGBAColor;
+    satViewColor: RGBAColor;
+    satCaptureColor: RGBAColor;
+    borderColor: RGBAColor;
+    groupColor: any[];
+    groupPointSize: any[];
+    groupPointShape: any[];
+    groupPointVisibility: any[];
+    groupOrbitVisibility: any[];
+    groupRenderSatLine: any[];
+    groupRenderSatView: any[];
+    groupRenderSatCapture: any[];
+    cursor: number[];
+    wheelSensivity: number;
+    mouseSensivity: number;
+    commsPointMinimalSize: number;
+    commsGroup: number;
+}

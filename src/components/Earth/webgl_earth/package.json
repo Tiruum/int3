@@ -1,0 +1,28 @@
+{
+    "name": "@integral/webgl_earth",
+    "version": "1.4.1",
+    "main": "build/src/index.js",
+    "source": "build/src/index.js",
+    "type": "module",
+    "homepage": ".",
+    "scripts": {
+        "build": "npm i && npm run leap && npm run shaders && tsc && rm shaders/common.glsl src/shaders.js",
+        "test": "python3 -m http.server 8001",
+        "shaders": "cd shaders && ./cat_common.sh > common.glsl && cat common.glsl *.vert *.frag > ../src/shaders.js",
+        "leap": "echo \"export const leapSecondsInfo = \" | cat - node_modules/leap-seconds-list/list.json > src/leap_seconds.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.mmcp.mipt.ru/integral/alternative_ui/webgl_earth.git"
+    },
+    "publishConfig": {
+        "access": "public",
+        "@integral:registry": "https://gitlab.mmcp.mipt.ru/api/v4/projects/428/packages/npm/"
+    },
+    "files": [
+        "build"
+    ],
+    "dependencies": {
+        "leap-seconds-list": "^1.0.0"
+    }
+}

@@ -101,4 +101,4 @@ export class WebGLRenderer {
     actuallyRender(time: any, dt: any, rs: any): void;
     lastGroupData: Uint32Array;
 }
-import { RenderState } from "./render_state";
+import { RenderState } from "./render_state.js";

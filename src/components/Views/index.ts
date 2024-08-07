@@ -7,6 +7,8 @@ import Intro from "@/components/Views/Intro";
 import {Media} from "@/components/Views/Media";
 import Scenarios from "@/components/Views/Scenarios";
 import Visualisation from "@/components/Views/Visualisation";
+import { UsefulFor } from "@/components/Views/UsefulFor";
+import { Partners } from "@/components/Views/Partners";
 
 export {Articles,
     Benefits,
@@ -16,4 +18,7 @@ export {Articles,
     Intro,
     Media,
     Scenarios,
-    Visualisation}
+    Visualisation,
+    UsefulFor,
+    Partners
+}

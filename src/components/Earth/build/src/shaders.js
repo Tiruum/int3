@@ -258,8 +258,8 @@ const TimeInterval epochDiff[epochCount] = TimeInterval[epochCount] // epoch[0] 
 (
     TimeInterval(    0.f,        0.f),
     
-    TimeInterval(10957.f, 43157816.f)  // 946727957.816 seconds: 10597 * 86400 * 365.25 + 43200 + 22 - (32.184 + 10 + 22);
-                                     // TT  - TAI = 32.184, TAI - UTC = 10 (constant) + 22 (leap, 01.01.2000)
+    TimeInterval(10957.f, 43157816.f) // 946727957.816 seconds: 10597 * 86400 + 43200 + 22 - (32.184 + 10 + 22)
+                                      // TT - TAI = 32.184, TAI - UTC = 10 (constant) + 22 (leap, 01.01.2000)
     /*
     TimeInterval(36525.f,    22000.f),
     TimeInterval(36524.f, 59335600.f),
