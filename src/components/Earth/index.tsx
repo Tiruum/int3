@@ -33,7 +33,7 @@ export const Earth: FunctionComponent<{
 
         const renderState = new RenderState();
         const renderer = new WebGLRenderer(canvas, renderState);
-        const res = "/src/components/Earth/webgl_earth/build/res/";
+        const res = "/src/assets/res/";
         renderer.loadTextures(res + "mediump/");
 
         renderState.time = 1679374800.0 * 1000.0;
