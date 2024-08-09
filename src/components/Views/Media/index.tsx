@@ -161,7 +161,7 @@ export const Media = () => {
                     duration: 0.7,
                     delay: 0,
                     ease: 'power1.inOut',
-                    stagger: .2/2,
+                    stagger: .2/displayArticles.current.length,
                     scrollTrigger: {
                         trigger: scrollContainerRef.current,
                         start: "top 75%",

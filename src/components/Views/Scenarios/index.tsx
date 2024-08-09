@@ -98,7 +98,7 @@ const Scenarios: React.FC<ScenariosProps> = () => {
                     <div className="absolute w-[200vw] h-[200vh] backdrop-blur-sm -translate-x-1/2 -translate-y-1/2"
                          onClick={() => handleClose()}/>
                     <div
-                        className={`bg-gray-950/80 hideScroll backdrop-blur-2xl lg:border border-gray-700 lg:rounded-3xl lg:p-12 p-6 overflow-y-auto h-full`}>
+                        className={`bg-gray-950/80 hideScroll backdrop-blur-2xl lg:border border-gray-700 lg:rounded-3xl lg:p-12 lg:px-20 p-6 overflow-y-auto h-full`}>
                         <Xmark
                             className={`absolute lg:right-12 right-6 lg:top-12 top-6 text-red-300 w-8 h-8 flex-none cursor-pointer`}
                             onClick={() => handleClose()}/>

@@ -1,8 +1,12 @@
 import AnimatedText from "../../AnimatedText";
 import {useEffect, useMemo, useRef, useState} from "react";
 import cniimash from "@/assets/partners/cniimash.png"
+import fifth from "@/assets/partners/fifth.svg"
 import fpi from "@/assets/partners/fpi.png"
-import stc from "@/assets/partners/stc.png"
+import fsr from "@/assets/partners/fsr.png"
+import nsu from "@/assets/partners/nsu.svg"
+import sibgu from "@/assets/partners/sibgu.svg"
+import vigstar from "@/assets/partners/vigstar.png"
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {useGSAP} from "@gsap/react";
@@ -11,23 +15,39 @@ gsap.registerPlugin(ScrollTrigger)
 
 export const Partners = () => {
     type Image = {
-        id: number,
+        name: string,
         source: string
     }
     const images: Image[] = useMemo(() => [
         {
-            id: 0,
+            name: 'ЦНИИмаш',
             source: cniimash,
         },
         {
-            id: 1,
+            name: 'ОКБ Пятое поколение',
+            source: fifth,
+        },
+        {
+            name: 'Фонд перспективных исследований',
             source: fpi,
         },
         {
-            id: 1,
-            source: stc,
+            name: 'ФКИ',
+            source: fsr
+        },
+        {
+            name: 'НГУ',
+            source: nsu
+        },
+        {
+            name: 'СибГУ',
+            source: sibgu
+        },
+        {
+            name: 'Вигстар',
+            source: vigstar
         }
-    ], [])
+    ].sort(), [])
 
     const displayImages = useRef(images)
     const [ifMask, setIfMask] = useState<boolean>(false)
@@ -44,7 +64,7 @@ export const Partners = () => {
                 setIfMask(true)
                 scrollInterval = setInterval((): void => {
                     if (!isHovered) {
-                        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2 + 10) {
+                        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2 + 24) {
                             scrollContainer.scrollLeft = 0;
                         } else {
                             scrollContainer.scrollLeft += 1;
@@ -77,7 +97,7 @@ export const Partners = () => {
                     duration: 0.7,
                     delay: 0,
                     ease: 'power1.inOut',
-                    stagger: .2/2,
+                    stagger: .2/displayImages.current.length,
                     scrollTrigger: {
                         trigger: scrollContainerRef.current,
                         start: "top 75%",
@@ -97,7 +117,9 @@ export const Partners = () => {
                  style={ifMask ? {WebkitMask: "linear-gradient( to left, rgb(0, 0, 0, 0) 0%, rgb(0, 0, 0, 1) 5%, rgb(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 100% )"} : {}}>
                 {
                     [...displayImages.current].map((image: Image, index: number) => (
-                        <img key={`${image.id}_${index}`} src={image.source} alt=''/>
+                        <div key={`${image.name}_${index}`} className={'flex-none'}>
+                            <img src={image.source} alt='' className={'h-32 mix-blend-color-dodge'} title={image.name}/>
+                        </div>
                     ))
                 }
             </div>

@@ -46,8 +46,13 @@ const App: React.FC = () => {
                 <Benefits/>
             </Section>
 
-            <Section id={'scenarios'}>
+            <Section id={'mediaAndArticles'} className={`space-y-12`}>
                 <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 rotate-180'/>
+                <UsefulFor />
+            </Section>
+
+            <Section id={'scenarios'}>
+                <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 rotate-0'/>
                 <Scenarios/>
             </Section>
 
@@ -69,11 +74,6 @@ const App: React.FC = () => {
 
             <Section id={'mediaAndArticles'} className={`space-y-12`}>
                 <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 rotate-0'/>
-                <UsefulFor />
-            </Section>
-
-            <Section id={'mediaAndArticles'} className={`space-y-12`}>
-                <Grid className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 rotate-180'/>
                 <Partners />
             </Section>
 
