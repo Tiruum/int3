@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import AnimatedText from "../../AnimatedText";
-import {ArrowUpRightFromSquare, Rocket, Xmark} from "@gravity-ui/icons";
+import {ArrowUpRightFromSquare, Xmark} from "@gravity-ui/icons";
 import gsap from "gsap";
 import {PeriodicallyWatch} from "@/components/Views/Scenarios/periodicallyWatch.tsx";
 import {Abonent} from "@/components/Views/Scenarios/abonent.tsx";
@@ -32,13 +32,13 @@ const Scenarios: React.FC<ScenariosProps> = () => {
         },
         {
             id: 2,
-            Icon: Rocket,
+            mainImageSrc: '/scenarios/abonent/main.png',
             title: 'Абонентская связь',
             shortDescription: 'Основной сценарий для проектирования систем связи',
         },
         {
             id: 3,
-            Icon: Rocket,
+            mainImageSrc: '/scenarios/mergedGroup/main.png',
             title: 'Объединённая группировка',
             shortDescription: 'Совместное функционирование группировки ДЗЗ и связи',
         }
