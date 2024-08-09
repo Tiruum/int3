@@ -3,6 +3,8 @@ import AnimatedText from "../../AnimatedText";
 import {ArrowUpRightFromSquare, Rocket, Xmark} from "@gravity-ui/icons";
 import gsap from "gsap";
 import {PeriodicallyWatch} from "@/components/Views/Scenarios/periodicallyWatch.tsx";
+import {Abonent} from "@/components/Views/Scenarios/abonent.tsx";
+import {MergedGroup} from "@/components/Views/Scenarios/mergedGroup.tsx";
 
 // import Carousel from "../../Carousel";
 
@@ -26,19 +28,19 @@ const Scenarios: React.FC<ScenariosProps> = () => {
             id: 1,
             title: 'Периодичность наблюдения',
             mainImageSrc: '/scenarios/periodicallyWatch/main.png',
-            shortDescription: 'Произведение съёмки точечных целей на различных широтах и определение зависимости средней периодичности наблюдения цели от широты.',
+            shortDescription: 'Основной сценарий для проектирования систем ДЗЗ',
         },
         {
             id: 2,
             Icon: Rocket,
-            title: 'Название сценария',
-            shortDescription: 'Краткое описание',
+            title: 'Абонентская связь',
+            shortDescription: 'Основной сценарий для проектирования систем связи',
         },
         {
             id: 3,
             Icon: Rocket,
-            title: 'Название сценария',
-            shortDescription: 'Краткое описание',
+            title: 'Объединённая группировка',
+            shortDescription: 'Совместное функционирование группировки ДЗЗ и связи',
         }
     ];
 
@@ -103,6 +105,8 @@ const Scenarios: React.FC<ScenariosProps> = () => {
                             className={`absolute lg:right-12 right-6 lg:top-12 top-6 text-red-300 w-8 h-8 flex-none cursor-pointer`}
                             onClick={() => handleClose()}/>
                         {showOverlay === 1 && <PeriodicallyWatch/>}
+                        {showOverlay === 2 && <Abonent/>}
+                        {showOverlay === 3 && <MergedGroup/>}
 
                     </div>
                 </div>
