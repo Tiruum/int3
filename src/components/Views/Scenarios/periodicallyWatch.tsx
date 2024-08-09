@@ -1,4 +1,3 @@
-import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/carousel.tsx";
 import mainImage from '/scenarios/periodicallyWatch/main.png'
 import AnimatedText from "@/components/AnimatedText";
 import {Step} from "@/components/Views/Scenarios/step.tsx";
