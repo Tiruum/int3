@@ -118,7 +118,7 @@ export const Partners = () => {
                 {
                     [...displayImages.current].map((image: Image, index: number) => (
                         <div key={`${image.name}_${index}`} className={'flex-none'}>
-                            <img src={image.source} alt='' className={'h-32 mix-blend-color-dodge'} title={image.name}/>
+                            <img src={image.source} alt='' className={'h-32'} title={image.name}/>
                         </div>
                     ))
                 }

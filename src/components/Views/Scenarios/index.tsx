@@ -6,8 +6,6 @@ import {PeriodicallyWatch} from "@/components/Views/Scenarios/periodicallyWatch.
 import {Abonent} from "@/components/Views/Scenarios/abonent.tsx";
 import {MergedGroup} from "@/components/Views/Scenarios/mergedGroup.tsx";
 
-// import Carousel from "../../Carousel";
-
 interface ScenariosProps {
 }
 

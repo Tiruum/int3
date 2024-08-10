@@ -34,7 +34,7 @@ export const Earth: FunctionComponent<{
         const renderState = new RenderState();
         const renderer = new WebGLRenderer(canvas, renderState);
         const res = "/res/";
-        renderer.loadTextures(res + "mediump/");
+        renderer.loadTextures(res + "lowp/");
 
         renderState.time = 1679374800.0 * 1000.0;
 
