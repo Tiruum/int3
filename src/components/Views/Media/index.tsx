@@ -1,16 +1,11 @@
-import { ChevronRight } from "@gravity-ui/icons"
 import AnimatedText from "../../AnimatedText";
-import {useEffect, useRef, useState} from "react";
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import {useGSAP} from "@gsap/react";
+import {ScrollContainer} from "@/components/ScrollContainer";
+
 gsap.registerPlugin(ScrollTrigger)
 
 export const Media = () => {
-    const truncate = (text: string):string => {
-        const length = 90
-        return text.length <= 90 ? text + '.' : text.substring(0, length) + '...'
-    }
     type Article = {
         id: number,
         date: Date,
@@ -112,87 +107,10 @@ export const Media = () => {
         }
     ].sort((one: Article, two: Article) => Number(two.date) - Number(one.date))
 
-    const displayArticles = useRef(articles)
-    const [ifMask, setIfMask] = useState<boolean>(false)
-
-    const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const [isHovered, setIsHovered] = useState(false);
-
-    useEffect(() => {
-        const scrollContainer = scrollContainerRef.current;
-        let scrollInterval: NodeJS.Timeout;
-
-        if (scrollContainer) {
-            if (scrollContainer.scrollWidth > window.innerWidth) {
-                displayArticles.current = [...articles, ...articles]
-                setIfMask(true)
-                scrollInterval = setInterval((): void => {
-                    if (!isHovered) {
-                        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2 + 10) {
-                            scrollContainer.scrollLeft = 0;
-                        } else {
-                            scrollContainer.scrollLeft += 1;
-                        }
-                    }
-                }, 20);
-            }
-        }
-
-        return () => {
-            clearInterval(scrollInterval);
-        };
-    }, [isHovered, articles]);
-
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
-
-    useGSAP(() => {
-        if (scrollContainerRef.current) {
-            gsap.fromTo(scrollContainerRef.current.children,
-                {
-                    opacity: 0,
-                }, {
-                    opacity: 1,
-                    duration: 0.7,
-                    delay: 0,
-                    ease: 'power1.inOut',
-                    stagger: .2/displayArticles.current.length,
-                    scrollTrigger: {
-                        trigger: scrollContainerRef.current,
-                        start: "top 75%",
-                        toggleActions: "play none none reverse",
-                    },
-                });
-        }
-    }, { scope: scrollContainerRef })
-
     return (
         <>
-            <AnimatedText text={'СМИ о нас'} className='font-bold text-white text-5xl leading-[125%] mb-12' />
-            <div ref={scrollContainerRef}
-                 onMouseEnter={handleMouseEnter}
-                 onMouseLeave={handleMouseLeave}
-                 className="hideScroll overflow-x-auto gap-5 flex items-center relative"
-                 style={ifMask ? {WebkitMask: "linear-gradient( to left, rgb(0, 0, 0, 0) 0%, rgb(0, 0, 0, 1) 5%, rgb(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 100% )"} : {}}>
-                {
-                    [...displayArticles.current].map((article: Article, index: number) => (
-                        <div key={`${article.id}_${index}`}
-                             className='flex-none w-80 h-48 backdrop-blur-xs border rounded-xl group transition-all p-5 bg-gradient-to-bl from-violet-900/50 hover:from-violet-800/50 to-violet-950/50 hover:to-violet-900/50 border-violet-800 hover:border-violet-700'>
-                            <p className="text-violet-300 text-xs group-hover:text-white">{article.source}</p>
-                            <p className="text-base text-pretty text-slate-100 group-hover:text-violet-100">{truncate(article.text)}</p>
-
-                            <a href={article.url} target="_blank"
-                               className="text-base mt-auto font-bold text-violet-400 group-hover:text-violet-50 flex items-center">Перейти
-                                к новости <ChevronRight/></a>
-                        </div>
-                    ))
-                }
-            </div>
+            <AnimatedText text={'СМИ о нас'} className='font-bold text-white text-5xl leading-[125%] mb-12'/>
+            <ScrollContainer elements={articles} displayName={'media'} />
         </>
     )
 }
