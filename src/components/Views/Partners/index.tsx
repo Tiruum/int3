@@ -50,7 +50,7 @@ export const Partners = () => {
     ].sort(), [])
 
     const displayImages = useRef(images)
-    const [ifMask, setIfMask] = useState<boolean>(false)
+    const [ifMaskImage, setIfMaskImage] = useState<boolean>(false)
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
 
@@ -61,7 +61,7 @@ export const Partners = () => {
         if (scrollContainer) {
             if (scrollContainer.scrollWidth > window.innerWidth) {
                 displayImages.current = [...images, ...images]
-                setIfMask(true)
+                setIfMaskImage(true)
                 scrollInterval = setInterval((): void => {
                     if (!isHovered) {
                         if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2 + 24) {
@@ -114,7 +114,7 @@ export const Partners = () => {
                  onMouseEnter={handleMouseEnter}
                  onMouseLeave={handleMouseLeave}
                  className={"hideScroll overflow-x-auto gap-12 flex items-center relative"}
-                 style={ifMask ? {WebkitMask: "linear-gradient( to left, rgb(0, 0, 0, 0) 0%, rgb(0, 0, 0, 1) 5%, rgb(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 100% )"} : {}}>
+                 style={ifMaskImage ? {WebkitMask: "linear-gradient( to left, rgb(0, 0, 0, 0) 0%, rgb(0, 0, 0, 1) 5%, rgb(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 100% )"} : {}}>
                 {
                     [...displayImages.current].map((image: Image, index: number) => (
                         <div key={`${image.name}_${index}`} className={'flex-none'}>
