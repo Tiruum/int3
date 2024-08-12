@@ -134,7 +134,7 @@ const Functions: React.FC<FunctionsProps> = () => {
 
     return (
         <>
-            <AnimatedText text={'Функционал программного комплекса'} className='font-bold text-white text-5xl leading-[125%] mb-12' />
+            <AnimatedText text={'Функционал программного комплекса'} className='font-bold text-white lg:text-5xl text-3xl leading-[125%] mb-12' />
             <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-8 gap-4' ref={functionsRef}>
 
                 {

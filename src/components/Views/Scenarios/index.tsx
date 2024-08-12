@@ -91,7 +91,7 @@ const Scenarios: React.FC<ScenariosProps> = () => {
 
     return (
         <div>
-            <AnimatedText text={'Сценарии'} className='font-bold text-white text-5xl leading-[125%] mb-12'/>
+            <AnimatedText text={'Сценарии'} className='font-bold text-white lg:text-5xl text-3xl leading-[125%] mb-12'/>
             {
                 showOverlay !== 0 &&
                 <div className={`fixed top-0 left-0 right-0 h-screen lg:px-24 lg:py-6 p-0 z-50`} ref={modalRef}>

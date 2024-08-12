@@ -109,7 +109,7 @@ export const Media = () => {
 
     return (
         <>
-            <AnimatedText text={'СМИ о нас'} className='font-bold text-white text-5xl leading-[125%] mb-12'/>
+            <AnimatedText text={'СМИ о нас'} className='font-bold text-white lg:text-5xl text-3xl leading-[125%] mb-12'/>
             <ScrollContainer elements={articles} displayName={'media'} />
         </>
     )

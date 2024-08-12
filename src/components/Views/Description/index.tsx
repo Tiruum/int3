@@ -52,7 +52,7 @@ const Description: React.FC = () => {
     }, []);
     return (
         <>
-            <AnimatedText text={'Описание'} className='font-bold text-white text-5xl leading-[125%] mb-12' />
+            <AnimatedText text={'Описание'} className='font-bold text-white lg:text-5xl text-3xl leading-[125%] mb-12' />
             <h1 className="text-4xl font-bold text-center mb-8 ubuntu-mono-bold">
                 Первый российский программный комплекс для проектирования многоспутниковых космических систем
             </h1>

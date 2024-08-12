@@ -109,7 +109,7 @@ export const Partners = () => {
 
     return (
         <>
-            <AnimatedText text={'Наши партнеры'} className='font-bold text-white text-5xl leading-[125%] mb-12'/>
+            <AnimatedText text={'Наши партнеры'} className='font-bold text-white lg:text-5xl text-3xl leading-[125%] mb-12'/>
             <div ref={scrollContainerRef}
                  onMouseEnter={handleMouseEnter}
                  onMouseLeave={handleMouseLeave}
