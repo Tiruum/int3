@@ -39,7 +39,7 @@ const colorVariants = {
 const Box: React.FC<BoxProps> = ({color, Icon, title, description, col}) => {
         return (
         <div
-            className={`group flex ${col ? 'flex-col justify-center' : 'items-center'} gap-4 rounded-xl bg-gradient-to-br p-4 border ${colorVariants[color].box} transition-all backdrop-blur-xs`}>
+            className={`group flex ${col ? 'flex-col' : 'items-center'} gap-4 rounded-xl bg-gradient-to-br p-4 border ${colorVariants[color].box} transition-all backdrop-blur-xs`}>
             {Icon && <Icon className={`${colorVariants[color].icon} w-8 h-8 flex-none`}/>}
             <div className="flex flex-col gap-1">
                 {title && <p className={`${colorVariants[color].title} leading-5 text-lg font-bold`}>{title}</p>}

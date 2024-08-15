@@ -37,7 +37,7 @@ const Scenarios: React.FC<ScenariosProps> = () => {
         {
             id: 3,
             mainImageSrc: '/scenarios/mergedGroup/main.png',
-            title: 'Объединённая группировка',
+            title: 'Объединенная группировка',
             shortDescription: 'Совместное функционирование группировки ДЗЗ и связи',
         }
     ];

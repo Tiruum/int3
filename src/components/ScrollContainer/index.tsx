@@ -30,28 +30,26 @@ export const ScrollContainer: React.FC<ScrollContainerProps> = ({elements, stagg
 
     useEffect(() => {
         const scrollContainer = scrollContainerRef.current;
-        let scrollInterval: NodeJS.Timeout;
 
-        if (scrollContainer) {
-            if (scrollContainer.scrollWidth > window.innerWidth) {
-                displayElements.current = [...elements, ...elements]
-                setIfMask(true)
-                scrollInterval = setInterval((): void => {
-                    if (!isHovered) {
-                        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2 + 10) {
-                            scrollContainer.scrollLeft = 0;
-                        } else {
-                            scrollContainer.scrollLeft += 1;
-                        }
-                    }
-                }, 20);
-            }
+        if (scrollContainer && scrollContainer.scrollWidth > window.innerWidth) {
+            setIfMask(true)
+            displayElements.current = [...elements, ...elements]
         }
+
+        const scrollInterval = setInterval((): void => {
+            if (!isHovered && scrollContainer) {
+                if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2 + 10) {
+                    scrollContainer.scrollLeft = 0;
+                } else {
+                    scrollContainer.scrollLeft += 1;
+                }
+            }
+        }, 30);
 
         return () => {
             clearInterval(scrollInterval);
         };
-    }, [isHovered, elements]);
+    }, [elements, isHovered]);
 
     const handleMouseEnter = () => {
         setIsHovered(true);
