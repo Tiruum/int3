@@ -14,8 +14,11 @@ const ContactForm: React.FC<ContactFormProps> = ({setShowContact}) => {
 
     const [phoneNumber, setPhoneNumber] = useState('')
     const [email, setEmail] = useState('')
-    const formatPhoneNumber = (input: string) => {
+    const [fio, setFio] = useState('')
+    const [organisation, setOrganisation] = useState('')
+    const [message, setMessage] = useState('')
 
+    const formatPhoneNumber = (input: string) => {
         const cleaned = input.replace(/\D/g, '');
         let formatted = ''
         if (cleaned.length <= 1) {
@@ -61,7 +64,7 @@ const ContactForm: React.FC<ContactFormProps> = ({setShowContact}) => {
     return (
         <div className='fixed w-screen h-screen z-[100] backdrop-blur-md bg-black/30 top-0'>
             <form ref={form} onSubmit={sendEmail}
-                  className='fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900/70 p-12 rounded-3xl border border-gray-500/50 space-y-6'>
+                  className='fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900/70 p-12 rounded-3xl border border-gray-500/50 space-y-6 lg:w-1/2 md:w-2/3 w-full'>
                 <div className='flex items-center'>
                     <p className='text-3xl'>Связаться с нами</p>
                     <Xmark className='text-white w-8 h-8 flex-none cursor-pointer ml-auto'
@@ -69,23 +72,37 @@ const ContactForm: React.FC<ContactFormProps> = ({setShowContact}) => {
                 </div>
                 <div className='space-y-2'>
                     <input type="text" name="from_name"
-                           className='w-full bg-gray-900 rounded-lg px-4 py-2 text-slate-300 focus:border-none'
-                           placeholder='ФИО' required/>
+                           className={`${fio.length <= 3 ? 'text-pink-500' : 'text-gray-300'} w-full bg-gray-900 rounded-lg px-4 py-2 focus:border-none`}
+                           placeholder='ФИО' required defaultValue={fio} onChange={(e) => setFio(e.target.value)}/>
+                    <small
+                        className={`text-sm text-gray-500`}>{fio.length <= 3 ? 'Длина ФИО должна быть больше 3 символов' : ''}</small>
                     <input type="email" name="from_email" defaultValue={email}
                            onChange={(e) => setEmail(e.target.value)}
-                           className={`${email.match(emailPattern) ? 'text-green-500' : 'text-pink-500'} w-full bg-gray-900 rounded px-4 py-2 focus:border-none`}
+                           className={`${email.match(emailPattern) ? 'text-gray-300' : 'text-pink-500'} w-full bg-gray-900 rounded px-4 py-2 focus:border-none`}
                            placeholder='Email' required/>
+                    <small
+                        className={`text-sm text-gray-500`}>{!email.match(emailPattern) ? 'Почта должна соответствовать формату' : ''}</small>
                     <input type="tel" name="from_tel"
-                           className={`${phoneNumber.match(telPattern) ? 'text-green-500' : 'text-pink-500'} w-full bg-gray-900 rounded-lg px-4 py-2 focus:border-none invalid:text-pink-500 invalid:ring invalid:ring-pink-500`}
+                           className={`${phoneNumber.match(telPattern) ? 'text-gray-300' : 'text-pink-500'} w-full bg-gray-900 rounded-lg px-4 py-2 focus:border-none invalid:text-pink-500`}
                            placeholder='Телефон' value={phoneNumber} onChange={(e) => handlePhoneNumber(e.target.value)}
                            required/>
+                    <small
+                        className={`text-sm text-gray-500`}>{!phoneNumber.match(telPattern) ? 'Телефон должен соответствовать формату' : ''}</small>
                     <input type="text" name="from_org"
-                           className='w-full bg-gray-900 rounded-lg px-4 py-2 text-slate-300 focus:border-none'
-                           placeholder='Наименование организации' required/>
-                    <textarea name="message" className='w-full bg-gray-900 rounded-lg px-4 py-2 text-slate-300 max-h-60'
-                              placeholder='Сообщение' required/>
+                           className={`${organisation.length <= 3 ? 'text-pink-500' : 'text-gray-300'} w-full bg-gray-900 rounded-lg px-4 py-2 focus:border-none`}
+                           placeholder='Наименование организации' required defaultValue={organisation}
+                           onChange={(e) => setOrganisation(e.target.value)}/>
+                    <small
+                        className={`text-sm text-gray-500`}>{organisation.length <= 3 ? 'Длина наименования должна быть больше 3 символов' : ''}</small>
+                    <textarea name="message"
+                              className={`${message.length <= 5 ? 'text-pink-500' : 'text-gray-300'} w-full bg-gray-900 rounded-lg px-4 py-2 max-h-60`}
+                              placeholder='Сообщение' required defaultValue={message}
+                              onChange={(e) => setMessage(e.target.value)}/>
+                    <small
+                        className={`text-sm text-gray-500`}>{message.length <= 5 ? 'Длина сообщения должна быть больше 5 символов' : ''}</small>
                 </div>
-                <button type='submit' disabled={!(email.match(emailPattern) && phoneNumber.match(telPattern))}
+                <button type='submit'
+                        disabled={!email.match(emailPattern) || !phoneNumber.match(telPattern) || fio.length <= 3 || message.length <= 5 || organisation.length <= 3}
                         className={`disabled:opacity-50 disabled:cursor-not-allowed ml-auto flex items-center px-6 py-2 bg-sky-500 text-slate-50 rounded-full hover:bg-sky-700 transition-all`}>Отправить <ChevronRight/>
                 </button>
             </form>
