@@ -50,41 +50,34 @@ export const Partners = () => {
     ].sort(), [])
 
     const displayImages = useRef(images)
-    const [ifMaskImage, setIfMaskImage] = useState<boolean>(false)
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const [isHovered, setIsHovered] = useState(false);
+    const [isHoveredImages, setIsHoveredImages] = useState(false);
 
     useEffect(() => {
         const scrollContainer = scrollContainerRef.current;
-        let scrollInterval: NodeJS.Timeout;
+        displayImages.current = [...images, ...images]
 
-        if (scrollContainer) {
-            if (scrollContainer.scrollWidth > window.innerWidth) {
-                displayImages.current = [...images, ...images]
-                setIfMaskImage(true)
-                scrollInterval = setInterval((): void => {
-                    if (!isHovered) {
-                        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2 + 24) {
-                            scrollContainer.scrollLeft = 0;
-                        } else {
-                            scrollContainer.scrollLeft += 1;
-                        }
-                    }
-                }, 20);
+        const scrollInterval = setInterval((): void => {
+            if (!isHoveredImages && scrollContainer) {
+                if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2 + 24) {
+                    scrollContainer.scrollLeft = 0;
+                } else {
+                    scrollContainer.scrollLeft += 1;
+                }
             }
-        }
+        }, 30);
 
         return () => {
             clearInterval(scrollInterval);
         };
-    }, [isHovered, images]);
+    }, [images, isHoveredImages]);
 
     const handleMouseEnter = () => {
-        setIsHovered(true);
+        setIsHoveredImages(true);
     };
 
     const handleMouseLeave = () => {
-        setIsHovered(false);
+        setIsHoveredImages(false);
     };
 
     useGSAP(() => {
@@ -114,7 +107,7 @@ export const Partners = () => {
                  onMouseEnter={handleMouseEnter}
                  onMouseLeave={handleMouseLeave}
                  className={"hideScroll overflow-x-auto gap-12 flex items-center relative"}
-                 style={ifMaskImage ? {WebkitMask: "linear-gradient( to left, rgb(0, 0, 0, 0) 0%, rgb(0, 0, 0, 1) 5%, rgb(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 100% )"} : {}}>
+                 style={{WebkitMask: "linear-gradient( to left, rgb(0, 0, 0, 0) 0%, rgb(0, 0, 0, 1) 5%, rgb(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 100% )"}}>
                 {
                     [...displayImages.current].map((image: Image, index: number) => (
                         <div key={`${image.name}_${index}`} className={'flex-none'}>

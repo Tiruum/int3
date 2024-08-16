@@ -14,7 +14,8 @@ interface Element {
 interface ScrollContainerProps {
     elements: Element[],
     staggerTime?: number,
-    displayName: string
+    displayName: string,
+    ifMask?: boolean
 }
 
 const truncate = (text: string): string => {
@@ -22,17 +23,15 @@ const truncate = (text: string): string => {
     return text.length <= 90 ? text + '.' : text.substring(0, length) + '...'
 }
 
-export const ScrollContainer: React.FC<ScrollContainerProps> = ({elements, staggerTime, displayName}) => {
+export const ScrollContainer: React.FC<ScrollContainerProps> = ({elements, staggerTime, displayName, ifMask}) => {
     const displayElements = useRef(elements)
-    const [ifMask, setIfMask] = useState<boolean>(false)
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
 
     useEffect(() => {
         const scrollContainer = scrollContainerRef.current;
 
-        if (scrollContainer && scrollContainer.scrollWidth > window.innerWidth) {
-            setIfMask(true)
+        if (ifMask) {
             displayElements.current = [...elements, ...elements]
         }
 
@@ -49,7 +48,7 @@ export const ScrollContainer: React.FC<ScrollContainerProps> = ({elements, stagg
         return () => {
             clearInterval(scrollInterval);
         };
-    }, [elements, isHovered]);
+    }, [ifMask, elements, isHovered]);
 
     const handleMouseEnter = () => {
         setIsHovered(true);

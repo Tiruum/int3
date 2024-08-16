@@ -41,7 +41,7 @@ const Articles: React.FC = () => {
             <AnimatedText text={'Статьи с упоминанием нас'}
                           className='font-bold text-white lg:text-5xl text-3xl leading-[125%] mb-12'/>
 
-            <ScrollContainer elements={articles} displayName={'articles'}/>
+            <ScrollContainer elements={articles} displayName={'articles'} ifMask={false}/>
         </>
     );
 }
