@@ -36,7 +36,7 @@ const ContactForm: React.FC<ContactFormProps> = ({setShowContact}) => {
     }
 
     const handlePhoneNumber = (value: string) => {
-        setPhoneNumber(formatPhoneNumber(value));
+        if (value.length < 18) setPhoneNumber(formatPhoneNumber(value));
     };
 
     const form = useRef<HTMLFormElement>(null);
@@ -72,37 +72,27 @@ const ContactForm: React.FC<ContactFormProps> = ({setShowContact}) => {
                 </div>
                 <div className='space-y-2'>
                     <input type="text" name="from_name"
-                           className={`${fio.length <= 3 ? 'text-pink-500' : 'text-gray-300'} w-full bg-gray-900 rounded-lg px-4 py-2 focus:border-none`}
+                           className={`${fio.length <= 2 ? 'text-pink-500' : 'text-gray-300'} w-full bg-gray-900 rounded-lg px-4 py-2 focus:border-none`}
                            placeholder='ФИО' required defaultValue={fio} onChange={(e) => setFio(e.target.value)}/>
-                    <small
-                        className={`text-sm text-gray-500`}>{fio.length <= 3 ? 'Длина ФИО должна быть больше 3 символов' : ''}</small>
                     <input type="email" name="from_email" defaultValue={email}
                            onChange={(e) => setEmail(e.target.value)}
                            className={`${email.match(emailPattern) ? 'text-gray-300' : 'text-pink-500'} w-full bg-gray-900 rounded px-4 py-2 focus:border-none`}
                            placeholder='Email' required/>
-                    <small
-                        className={`text-sm text-gray-500`}>{!email.match(emailPattern) ? 'Почта должна соответствовать формату' : ''}</small>
                     <input type="tel" name="from_tel"
                            className={`${phoneNumber.match(telPattern) ? 'text-gray-300' : 'text-pink-500'} w-full bg-gray-900 rounded-lg px-4 py-2 focus:border-none invalid:text-pink-500`}
-                           placeholder='Телефон' value={phoneNumber} onChange={(e) => handlePhoneNumber(e.target.value)}
+                           placeholder='8 (XXX) XXX-XX-XX' value={phoneNumber} onChange={(e) => handlePhoneNumber(e.target.value)}
                            required/>
-                    <small
-                        className={`text-sm text-gray-500`}>{!phoneNumber.match(telPattern) ? 'Телефон должен соответствовать формату' : ''}</small>
                     <input type="text" name="from_org"
                            className={`${organisation.length <= 3 ? 'text-pink-500' : 'text-gray-300'} w-full bg-gray-900 rounded-lg px-4 py-2 focus:border-none`}
                            placeholder='Наименование организации' required defaultValue={organisation}
                            onChange={(e) => setOrganisation(e.target.value)}/>
-                    <small
-                        className={`text-sm text-gray-500`}>{organisation.length <= 3 ? 'Длина наименования должна быть больше 3 символов' : ''}</small>
                     <textarea name="message"
                               className={`${message.length <= 5 ? 'text-pink-500' : 'text-gray-300'} w-full bg-gray-900 rounded-lg px-4 py-2 max-h-60`}
                               placeholder='Сообщение' required defaultValue={message}
                               onChange={(e) => setMessage(e.target.value)}/>
-                    <small
-                        className={`text-sm text-gray-500`}>{message.length <= 5 ? 'Длина сообщения должна быть больше 5 символов' : ''}</small>
                 </div>
                 <button type='submit'
-                        disabled={!email.match(emailPattern) || !phoneNumber.match(telPattern) || fio.length <= 3 || message.length <= 5 || organisation.length <= 3}
+                        disabled={!email.match(emailPattern) || !phoneNumber.match(telPattern) || fio.length <= 2 || message.length <= 5 || organisation.length <= 2}
                         className={`disabled:opacity-50 disabled:cursor-not-allowed ml-auto flex items-center px-6 py-2 bg-sky-500 text-slate-50 rounded-full hover:bg-sky-700 transition-all`}>Отправить <ChevronRight/>
                 </button>
             </form>
