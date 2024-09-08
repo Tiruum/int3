@@ -73,26 +73,26 @@ const ContactForm: React.FC<ContactFormProps> = ({setShowContact}) => {
                 <div className='space-y-2'>
                     <input type="text" name="from_name"
                            className={`${fio.length <= 2 ? 'text-pink-500' : 'text-gray-300'} w-full bg-gray-900 rounded-lg px-4 py-2 focus:border-none`}
-                           placeholder='ФИО' required defaultValue={fio} onChange={(e) => setFio(e.target.value)}/>
+                           placeholder='ФИО*' required defaultValue={fio} onChange={(e) => setFio(e.target.value)}/>
                     <input type="email" name="from_email" defaultValue={email}
                            onChange={(e) => setEmail(e.target.value)}
                            className={`${email.match(emailPattern) ? 'text-gray-300' : 'text-pink-500'} w-full bg-gray-900 rounded px-4 py-2 focus:border-none`}
-                           placeholder='Email' required/>
+                           placeholder='Email*' required/>
                     <input type="tel" name="from_tel"
                            className={`${phoneNumber.match(telPattern) ? 'text-gray-300' : 'text-pink-500'} w-full bg-gray-900 rounded-lg px-4 py-2 focus:border-none invalid:text-pink-500`}
                            placeholder='8 (XXX) XXX-XX-XX' value={phoneNumber} onChange={(e) => handlePhoneNumber(e.target.value)}
                            required/>
                     <input type="text" name="from_org"
                            className={`${organisation.length <= 3 ? 'text-pink-500' : 'text-gray-300'} w-full bg-gray-900 rounded-lg px-4 py-2 focus:border-none`}
-                           placeholder='Наименование организации' required defaultValue={organisation}
+                           placeholder='Наименование организации*' required defaultValue={organisation}
                            onChange={(e) => setOrganisation(e.target.value)}/>
                     <textarea name="message"
                               className={`${message.length <= 5 ? 'text-pink-500' : 'text-gray-300'} w-full bg-gray-900 rounded-lg px-4 py-2 max-h-60`}
-                              placeholder='Сообщение' required defaultValue={message}
+                              placeholder='Сообщение*' required defaultValue={message}
                               onChange={(e) => setMessage(e.target.value)}/>
                 </div>
                 <button type='submit'
-                        disabled={!email.match(emailPattern) || !phoneNumber.match(telPattern) || fio.length <= 2 || message.length <= 5 || organisation.length <= 2}
+                        disabled={!email.match(emailPattern) || fio.length <= 2 || message.length <= 5 || organisation.length <= 2}
                         className={`disabled:opacity-50 disabled:cursor-not-allowed ml-auto flex items-center px-6 py-2 bg-sky-500 text-slate-50 rounded-full hover:bg-sky-700 transition-all`}>Отправить <ChevronRight/>
                 </button>
             </form>

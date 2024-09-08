@@ -16,12 +16,12 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className }) => {
         const chars = containerRef.current?.querySelectorAll('.char');
         if (chars) {
             gsap.fromTo(chars, {
-                y: 50,
+                y: 25,
                 opacity: 0
             }, {
                 y: 0,
                 opacity: 1,
-                duration: 0.25,
+                duration: 0.1,
                 ease: 'power1.inOut',
                 delay: 0,
                 stagger: {
@@ -38,7 +38,7 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className }) => {
     }, [text]);
 
     return (
-        <div ref={containerRef} className={`${className} overflow-hidden`}>
+        <div ref={containerRef} className={`${className}`}>
             {text.split(' ').map((word, index) => (
                 <span key={index} className="word inline-block">
                     {word.split('').map((char, charIndex) => (

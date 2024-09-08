@@ -157,6 +157,7 @@ export const Earth: FunctionComponent<{
         renderState.framesBetweenFade = 50;
         renderState.satLineFade = 3;
         renderState.satViewFade = 2;
+        renderState.timeMultiplier = 20 // initial time multiplier
 
 
         if (!ifControls) renderState.enableHover = false;
